@@ -11,6 +11,7 @@ function App() {
 	<>
 	  <div>
 		{window.WebApp ? 'WebApp is available' : 'WebApp is not available'}
+		{window.WebApp.initData}
 	  </div>
 	</>
   )
