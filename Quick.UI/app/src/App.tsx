@@ -10,7 +10,7 @@ function App() {
   return (
 	<>
 	  <div>
-		{window.WebApp}
+		{window.WebApp ? 'WebApp is available' : 'WebApp is not available'}
 	  </div>
 	</>
   )
