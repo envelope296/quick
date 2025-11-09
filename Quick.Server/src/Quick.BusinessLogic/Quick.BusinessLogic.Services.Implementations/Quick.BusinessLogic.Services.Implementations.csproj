@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.14.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Quick.Common.Helpers\Quick.Common.Helpers.csproj" />
+    <ProjectReference Include="..\..\Quick.Common\Quick.Common.Configuration\Quick.Common.Configuration.csproj" />
+    <ProjectReference Include="..\..\Quick.Common\Quick.Common.DataAccess.Abstraction\Quick.Common.DataAccess.Abstraction.csproj" />
+    <ProjectReference Include="..\..\Quick.DataAccess\Quick.DataAccess.Models\Quick.DataAccess.Models.csproj" />
+    <ProjectReference Include="..\Quick.BusinessLogic.Contracts\Quick.BusinessLogic.Contracts.csproj" />
+    <ProjectReference Include="..\Quick.BusinessLogic.Repositories.Abstractions\Quick.BusinessLogic.Repositories.Abstractions.csproj" />
+    <ProjectReference Include="..\Quick.BusinessLogic.Services.Abstractions\Quick.BusinessLogic.Services.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

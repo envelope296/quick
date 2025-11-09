@@ -7,6 +7,8 @@ namespace Quick.Common.DataAccess.Abstraction.Repositories
         where TEntityId : notnull, IEquatable<TEntityId>
         where TEntity : BaseEntity<TEntityId>
     {
+        Task<TEntityId?> GetIdAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+
         Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
 
         Task<TEntity?> GetAsync(TEntityId id, CancellationToken cancellationToken);

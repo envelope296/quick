@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>12198e06-51e8-42e3-aa09-781e5a62c0e0</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.21" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Quick.BusinessLogic\Quick.BusinessLogic.Contracts\Quick.BusinessLogic.Contracts.csproj" />
+    <ProjectReference Include="..\..\Quick.BusinessLogic\Quick.BusinessLogic.Repositories.Abstractions\Quick.BusinessLogic.Repositories.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Quick.BusinessLogic\Quick.BusinessLogic.Repositories.Implementations\Quick.BusinessLogic.Repositories.Implementations.csproj" />
+    <ProjectReference Include="..\..\Quick.BusinessLogic\Quick.BusinessLogic.Services.Abstractions\Quick.BusinessLogic.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Quick.BusinessLogic\Quick.BusinessLogic.Services.Implementations\Quick.BusinessLogic.Services.Implementations.csproj" />
+    <ProjectReference Include="..\..\Quick.Common.Context\Quick.Common.Context.csproj" />
+    <ProjectReference Include="..\..\Quick.Common\Quick.Common.Configuration\Quick.Common.Configuration.csproj" />
+    <ProjectReference Include="..\..\Quick.DataAccess\Quick.DataAccess.Context\Quick.DataAccess.Context.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -23,6 +23,11 @@ namespace Quick.DataAccess.Context.Repositories
 
         protected DbSet<TEntity> DbSet => _dbSet;
 
+        public Task<TEntityId?> GetIdAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return _dbSet.Where(predicate).Select(entity => entity.Id).FirstOrDefaultAsync(cancellationToken);
+        }
+
         public Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
         {
             return _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
