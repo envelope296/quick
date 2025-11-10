@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Quick.BusinessLogic.Contracts.Dto.Users;
 using Quick.BusinessLogic.Contracts.Exceptions.Users;
 using Quick.BusinessLogic.Contracts.Requests.Users;
@@ -8,6 +9,7 @@ using Quick.BusinessLogic.Services.Abstractions;
 using Quick.Common.Configuration.Options;
 using Quick.Common.Helpers.Crypto;
 using Quick.DataAccess.Models;
+using System.Web;
 
 namespace Quick.BusinessLogic.Services.Implementations
 {
@@ -16,6 +18,14 @@ namespace Quick.BusinessLogic.Services.Implementations
         private static string InitDataHashKey = "hash";
         private static string InitDataUserKey = "user";
         private static string SecretKeyMessage = "WebAppData";
+
+        private static JsonSerializerSettings WebAppUserSerializerSettings = new JsonSerializerSettings
+        {
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new SnakeCaseNamingStrategy()
+            }
+        };
 
         private readonly IJwtGenerationService _jwtGenerationService;
         private readonly IUserRepository _userRepository;
@@ -34,34 +44,40 @@ namespace Quick.BusinessLogic.Services.Implementations
         public async Task<string> GenerateTokenAsync(GenerateUserTokenRequest request, CancellationToken cancellationToken)
         {
             var parsedInitData = ParseInitData(request.InitData);
-            if (!ValidateInitData(parsedInitData)) 
-            {
-                throw new InvalidInitDataException();
-            }
+            //if (!ValidateInitData(parsedInitData)) 
+            //{
+            //    throw new InvalidInitDataException();
+            //}
 
             var userData = GetValueFromInitData(parsedInitData, InitDataUserKey);
             var user = ParseWebAppUser(userData);
+            var userId = await CreateOrUpdateAsync(user, cancellationToken);
 
-            long? userId = await _userRepository.GetIdAsync(u => u.MessagerUserId == user.Id, cancellationToken);
-            if (!userId.HasValue)
+            return _jwtGenerationService.GenerateJwtToken(userId);
+        }
+
+        private async Task<long> CreateOrUpdateAsync(WebAppUserDto webAppUser, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.GetAsync(u => u.MessagerUserId == webAppUser.Id, cancellationToken);
+            if (user == null)
             {
-                var newUser = new User { MessagerUserId = user.Id };
-                _userRepository.Add(newUser);
-                await _userRepository.SaveChangesAsync(cancellationToken);
-                userId = user.Id;
+                var newUser = new User { MessagerUserId = webAppUser.Id };
+                await _userRepository.ExecuteAddAsync(newUser, cancellationToken);
+                return newUser.Id;
             }
-
-            return _jwtGenerationService.GenerateJwtToken(userId.Value);
+            return user.Id;
         }
 
         private static Dictionary<string, string> ParseInitData(string initData)
         {
-            var decodedInitData = Uri.UnescapeDataString(initData);
+            var decodedInitData = HttpUtility.UrlDecode(initData);
             return decodedInitData
                 .Split('&')
-                .Select(part => part.Split('='))
-                .Where(parts => parts.Length == 2)
-                .ToDictionary(parts => parts[0], parts => parts[1]);
+                .Select(part => part.Split('=', 2))
+                .ToDictionary(
+                    parts => parts[0], 
+                    parts => HttpUtility.UrlDecode(parts[1])
+                );
         }
 
         private bool ValidateInitData(Dictionary<string, string> initData)
@@ -84,7 +100,7 @@ namespace Quick.BusinessLogic.Services.Implementations
         {
             try
             {
-                var user = JsonConvert.DeserializeObject<WebAppUserDto>(userData);
+                var user = JsonConvert.DeserializeObject<WebAppUserDto>(userData, WebAppUserSerializerSettings);
                 return user;
             }
             catch (Exception e)

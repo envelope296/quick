@@ -3,7 +3,7 @@ using Quick.DataAccess.Models;
 
 namespace Quick.BusinessLogic.Repositories.Abstractions
 {
-    public interface IUserRepository : IEntityWithIdRepository<User, long>
+    public interface IGroupMemberRepository : IEntityRepository<GroupMember>
     {
 
     }

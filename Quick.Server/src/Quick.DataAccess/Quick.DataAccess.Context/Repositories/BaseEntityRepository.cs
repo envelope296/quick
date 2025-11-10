@@ -5,9 +5,8 @@ using System.Linq.Expressions;
 
 namespace Quick.DataAccess.Context.Repositories
 {
-    public abstract class BaseRepository<TDbContext, TEntity, TEntityId> : IRepository<TEntity, TEntityId>
-        where TEntityId : notnull, IEquatable<TEntityId>
-        where TEntity : BaseEntity<TEntityId>
+    public class BaseEntityRepository<TDbContext, TEntity> : IEntityRepository<TEntity>
+        where TEntity : class
         where TDbContext : DbContext
     {
         private static EntityState[] AuditableEntityStates = [EntityState.Modified, EntityState.Added];
@@ -15,7 +14,7 @@ namespace Quick.DataAccess.Context.Repositories
         private readonly TDbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
 
-        public BaseRepository(TDbContext dbContext)
+        public BaseEntityRepository(TDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = dbContext.Set<TEntity>();
@@ -23,20 +22,9 @@ namespace Quick.DataAccess.Context.Repositories
 
         protected DbSet<TEntity> DbSet => _dbSet;
 
-        public Task<TEntityId?> GetIdAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
-        {
-            return _dbSet.Where(predicate).Select(entity => entity.Id).FirstOrDefaultAsync(cancellationToken);
-        }
-
         public Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
         {
             return _dbSet.FirstOrDefaultAsync(predicate, cancellationToken);
-        }
-
-        public async Task<TEntity?> GetAsync(TEntityId id, CancellationToken cancellationToken)
-        {
-            var result = await GetAsync(PredicateById(id), cancellationToken);
-            return result;
         }
 
         public Task<bool> CheckIfExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
@@ -44,21 +32,15 @@ namespace Quick.DataAccess.Context.Repositories
             return _dbSet.AnyAsync(predicate, cancellationToken);
         }
 
-        public async Task<bool> CheckIfExistsAsync(TEntityId id, CancellationToken cancellationToken)
+        public async Task ExecuteAddAsync(TEntity entity, CancellationToken cancellationToken)
         {
-            var result = await _dbSet.AnyAsync(PredicateById(id), cancellationToken);
-            return result;
+            Add(entity);
+            await SaveChangesAsync(cancellationToken);
         }
 
         public Task<int> ExecuteDeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
         {
             return Filter(predicate).ExecuteDeleteAsync(cancellationToken);
-        }
-
-        public async Task<int> ExecuteDeleteAsync(TEntityId id, CancellationToken cancellationToken)
-        {
-            var result = await ExecuteDeleteAsync(PredicateById(id), cancellationToken);
-            return result;
         }
 
         public void Add(TEntity entity)
@@ -94,20 +76,13 @@ namespace Quick.DataAccess.Context.Repositories
             return _dbSet.Where(predicate);
         }
 
-        public IQueryable<TEntity> Filter(TEntityId id)
-        {
-            return Filter(PredicateById(id));
-        }
-
-        protected Expression<Func<TEntity, bool>> PredicateById(TEntityId id) => entity => entity.Id.Equals(id);
-
         private void UpdateAuditableEntities()
         {
             var currentDatetime = DateTimeOffset.UtcNow;
             var auditableEntities = _dbContext.ChangeTracker
                 .Entries<IAuditableEntity>()
                 .Where(entry => AuditableEntityStates.Contains(entry.State));
-            
+
             foreach (var entry in auditableEntities)
             {
                 var state = entry.State;

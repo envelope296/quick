@@ -1,4 +1,4 @@
-﻿namespace Quick.BusinessLogic.Contracts.Responses
+﻿namespace Quick.BusinessLogic.Contracts.Responses.Error
 {
     public class ErrorResponse
     {

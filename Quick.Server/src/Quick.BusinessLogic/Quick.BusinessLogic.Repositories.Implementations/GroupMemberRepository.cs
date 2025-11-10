@@ -5,9 +5,9 @@ using Quick.DataAccess.Models;
 
 namespace Quick.BusinessLogic.Repositories.Implementations
 {
-    public class UserRepository : BaseEntityWithIdRepository<ApplicationDbContext, User, long>, IUserRepository
+    public class GroupMemberRepository : BaseEntityRepository<ApplicationDbContext, GroupMember>, IGroupMemberRepository
     {
-        public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public GroupMemberRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
 
         }

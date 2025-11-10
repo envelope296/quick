@@ -23,7 +23,7 @@ namespace Quick.DataAccess.Models
         public Guid? SubgroupId { get; set; }
 
         /// <inheritdoc/>
-        public required DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset CreatedOn { get; set; }
 
         /// <inheritdoc/>
         public DateTimeOffset? UpdatedOn { get; set; }

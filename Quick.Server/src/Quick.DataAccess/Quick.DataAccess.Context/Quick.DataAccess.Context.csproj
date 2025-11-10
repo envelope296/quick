@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Quick.BusinessLogic\Quick.BusinessLogic.Contracts\Quick.BusinessLogic.Contracts.csproj" />
     <ProjectReference Include="..\..\Quick.Common\Quick.Common.DataAccess.Abstraction\Quick.Common.DataAccess.Abstraction.csproj" />
     <ProjectReference Include="..\Quick.DataAccess.Models\Quick.DataAccess.Models.csproj" />
   </ItemGroup>
