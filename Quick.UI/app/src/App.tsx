@@ -6,8 +6,8 @@ export function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<TestMain />} />
-        <Route path="/child" element={<TestChild />} />
+        <Route path="/*" element={<TestMain />} />
+        <Route path="/child/*" element={<TestChild />} />
       </Routes>
     </BrowserRouter>
   );
