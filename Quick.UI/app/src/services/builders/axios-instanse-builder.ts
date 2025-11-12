@@ -1,5 +1,5 @@
 import { AppConfig } from "@/config/app-config";
-import axios from "axios";
+import axios, { type AxiosInstance } from "axios";
 import * as appContext from '@/services/app-context'
 
 export function buildAxiosInstanse(relativeUrl: string, useAuthorization: boolean = false): AxiosInstance {
