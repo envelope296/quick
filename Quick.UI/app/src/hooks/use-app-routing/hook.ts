@@ -14,7 +14,7 @@ export function useAppRouting(previousPath: string | null = null) {
 
     useEffect(() => {
         const webApp = AppContext.getWebApp();
-        if (isRoot) {
+        if (!isRoot) {
             webApp.BackButton.onClick(toPrevious);
             webApp.BackButton.show();
 
