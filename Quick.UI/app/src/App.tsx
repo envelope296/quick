@@ -45,6 +45,16 @@ export default function App() {
         options={hapticOptions}
         onChange={onImpactStyleChange}
       />
+
+      <Button
+        onClick={() => {
+          const webApp = AppContext.getWebApp();
+          webApp.BackButton.show();
+          webApp.BackButton.onClick(() => alert('Нажата кнопка назад'))
+        }}
+      >
+        Включить кнопку "Назад"
+      </Button>
     </div>
   );
 }
