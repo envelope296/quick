@@ -7,10 +7,7 @@ namespace Quick.DataAccess.Models
     /// </summary>
     public class TimeSlot : BaseEntity<Guid>
     {
-        /// <summary>
-        /// Наименование слота.
-        /// </summary>
-        public required string Name { get; set; }
+        public int? OrderNumber { get; set; }
 
         /// <summary>
         /// Начало.

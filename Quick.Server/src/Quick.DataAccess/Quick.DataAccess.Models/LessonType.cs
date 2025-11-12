@@ -12,6 +12,8 @@ namespace Quick.DataAccess.Models
         /// </summary>
         public required string Name { get; set; }
 
+        public string? ShortName { get; set; }
+
         /// <summary>
         /// Цвет выделения типа занятия.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Quick.DataAccess.Models
         /// <summary>
         /// Идентификатор расписания.
         /// </summary>
-        public required Guid ScheduleId { get; set; }
+        public Guid ScheduleId { get; set; }
 
         /// <summary>
         /// Расписание.

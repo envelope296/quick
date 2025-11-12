@@ -1,6 +1,7 @@
 ﻿using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Quick.BusinessLogic.Contracts.Exceptions.Common;
 using Quick.BusinessLogic.Contracts.Exceptions.Users;
 using Quick.BusinessLogic.Contracts.Responses;
 using System.Net;
@@ -35,6 +36,10 @@ namespace Quick.API.Middlewares
             catch (InvalidInitDataException ex)
             {
                 await AssembleExceptionResponseAsync(context, ex, HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                await AssembleExceptionResponseAsync(context, ex, HttpStatusCode.NotFound, ex.Message);
             }
             catch (Exception ex)
             {

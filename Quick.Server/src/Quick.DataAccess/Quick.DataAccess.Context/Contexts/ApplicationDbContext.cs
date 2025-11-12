@@ -15,8 +15,10 @@ namespace Quick.DataAccess.Context.Contexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(IAssemblyMarker).Assembly);
+            
             modelBuilder.HasPostgresEnum<DayOfWeek>();
             modelBuilder.HasPostgresEnum<WeekType>();
+            modelBuilder.HasPostgresEnum<ScheduleType>();
         }
 
         public DbSet<Group> Groups { get; set; }

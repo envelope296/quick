@@ -12,6 +12,8 @@ namespace Quick.DataAccess.Models
         /// </summary>
         public required string Name { get; set; }
 
+        public required ScheduleType Type { get; set; }
+
         /// <summary>
         /// Идентификатор группы.
         /// </summary>

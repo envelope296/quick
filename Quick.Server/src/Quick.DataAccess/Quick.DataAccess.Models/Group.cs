@@ -25,7 +25,7 @@ namespace Quick.DataAccess.Models
         /// <summary>
         /// Идентификатор пользователя, которому принадлежит группа.
         /// </summary>
-        public required long OwnerId { get; set; }
+        public required long? OwnerId { get; set; }
 
         /// <summary>
         /// Пользователь, которому принадлежит группа.

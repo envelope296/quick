@@ -23,6 +23,7 @@ namespace Quick.DataAccess.Context.Factories
 
             dataSourceBuilder.MapEnum<DayOfWeek>();
             dataSourceBuilder.MapEnum<WeekType>();
+            dataSourceBuilder.MapEnum<ScheduleType>();
 
             return dataSourceBuilder.Build();
         }

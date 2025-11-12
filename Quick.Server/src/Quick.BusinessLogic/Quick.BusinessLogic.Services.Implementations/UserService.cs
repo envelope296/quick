@@ -61,7 +61,13 @@ namespace Quick.BusinessLogic.Services.Implementations
             var user = await _userRepository.GetAsync(u => u.MessagerUserId == webAppUser.Id, cancellationToken);
             if (user == null)
             {
-                var newUser = new User { MessagerUserId = webAppUser.Id };
+                var newUser = new User { 
+                    MessagerUserId = webAppUser.Id,
+                    FirstName = webAppUser.FirstName,
+                    LastName = webAppUser.LastName,
+                    UserName = webAppUser.Username,
+                    PhotoUrl = webAppUser.PhotoUrl,
+                };
                 await _userRepository.ExecuteAddAsync(newUser, cancellationToken);
                 return newUser.Id;
             }

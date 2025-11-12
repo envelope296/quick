@@ -29,10 +29,16 @@ namespace Quick.API.Controllers
             _groupMemberRepository = groupMemberRepository;
         }
 
-        [HttpPost("/page")]
-        public async Task<ActionResult<PageResponse<GroupResponse>>> GetPageAsync([FromBody] GetGroupsPageRequest request, CancellationToken cancellationToken)
+        [HttpGet("page")]
+        public async Task<ActionResult<PageResponse<GroupResponse>>> GetPageAsync(
+            [FromQuery] int page, 
+            [FromQuery] int size, 
+            CancellationToken cancellationToken)
         {
             var userContext = _userContextAccessor.GetCurrentOrFail();
+
+            // TODO: Validation
+
             var groupsPage = await _groupRepository.Filter(g =>
                 g.OwnerId == userContext.UserId ||
                 g.Members.Any(gm => gm.UserId == userContext.UserId)
@@ -41,12 +47,14 @@ namespace Quick.API.Controllers
             .ThenBy(g => g.CreatedOn)
             .Select(g => new GroupResponse
             {
+                Id = g.Id,
                 Name = g.Name,
                 Description = g.Description,
                 OwnerId = g.OwnerId,
                 IsPublic = g.IsPublic,
             })
-            .ToPageResponseAsync(request, cancellationToken);
+            .ToPageResponseAsync(page, size, cancellationToken);
+            
             return Ok(groupsPage);
         }
 
@@ -54,6 +62,7 @@ namespace Quick.API.Controllers
         public async Task<ActionResult<Guid>> CreateAsync([FromForm] CreateGroupRequest request, CancellationToken cancellationToken)
         {
             var userContext = _userContextAccessor.GetCurrentOrFail();
+            
             var group = new Group
             {
                 Name = request.Name,
@@ -62,28 +71,43 @@ namespace Quick.API.Controllers
                 IsPublic = true
             };
             await _groupRepository.ExecuteAddAsync(group, cancellationToken);
+            
             return Ok(group.Id);
         }
 
-        [HttpPost("/{id:guid}/members/page")]
-        public async Task<ActionResult<PageResponse<GroupMemberResponse>>> GetMembersPageAsync([FromRoute] Guid id, [FromQuery] int page, [FromQuery] int size, CancellationToken cancellationToken)
+        [HttpGet("{groupId:guid}/members/page")]
+        public async Task<ActionResult<PageResponse<GroupMemberResponse>>> GetMembersPageAsync(
+            [FromRoute] Guid groupId, 
+            [FromQuery] int page, 
+            [FromQuery] int size, 
+            CancellationToken cancellationToken)
         {
+            // TODO: Validation
+
             var groupMembers = await _groupMemberRepository
-                .Filter(gm => gm.GroupId == id)
+                .Filter(gm => gm.GroupId == groupId)
                 .Select(gm => new GroupMemberResponse
                 {
-
+                    UserId = gm.UserId,
+                    MessagerUserId = gm.User.MessagerUserId,
+                    FirstName = gm.User.FirstName,
+                    LastName = gm.User.LastName,
+                    UserName = gm.User.UserName,
+                    PhotoUrl = gm.User.PhotoUrl,
                 })
                 .ToPageResponseAsync(page, size, cancellationToken);
+            
             return Ok(groupMembers);
         }
 
-        [HttpPost("/{id:guid}/members")]
-        public async Task<ActionResult> AddMemberAsync([FromRoute] Guid groupId, [FromBody] AddGroupMemberRequest request, CancellationToken cancellationToken)
+        [HttpPost("members")]
+        public async Task<ActionResult> AddMemberAsync([FromBody] AddGroupMemberRequest request, CancellationToken cancellationToken)
         {
+            // TODO: Validation
+
             var groupMember = new GroupMember
             {
-                GroupId = groupId,
+                GroupId = request.GroupId,
                 UserId = request.UserId,
                 SubgroupId = request.SubgroupId
             };
@@ -91,9 +115,11 @@ namespace Quick.API.Controllers
             return Ok();
         }
 
-        [HttpDelete("/{groupId:guid}/members/{userId:long}")]
+        [HttpDelete("{groupId:guid}/members/{userId:long}")]
         public async Task<IActionResult> DeleteMemberAsync([FromRoute] Guid groupId, [FromRoute] long userId, CancellationToken cancellationToken)
         {
+            // TODO: Validation
+
             await _groupMemberRepository.ExecuteDeleteAsync(gm => gm.GroupId == groupId && gm.UserId == userId, cancellationToken);
             return Ok();
         }

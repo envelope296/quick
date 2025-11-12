@@ -12,6 +12,14 @@ namespace Quick.DataAccess.Models
         /// </summary>
         public required long MessagerUserId { get; set; }
 
+        public required string FirstName { get; set; }
+
+        public string? LastName { get; set; }
+
+        public string? UserName { get; set; }
+
+        public string? PhotoUrl { get; set; }
+
         /// <summary>
         /// Идентификатор текущего расписания.
         /// </summary>

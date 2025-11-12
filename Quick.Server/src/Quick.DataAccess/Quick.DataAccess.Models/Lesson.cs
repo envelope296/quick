@@ -10,7 +10,7 @@ namespace Quick.DataAccess.Models
         /// <summary>
         /// Идентификатор предмета.
         /// </summary>
-        public required Guid SubjectId { get; set; }
+        public required Guid? SubjectId { get; set; }
 
         /// <summary>
         /// Идентификатор временного слота.
@@ -41,6 +41,10 @@ namespace Quick.DataAccess.Models
         /// Идентификатор типа занятия.
         /// </summary>
         public Guid? LessonTypeId { get; set; }
+
+        public string? CabinetNumber { get; set; }
+
+        public string? Address { get; set; }
 
         /// <summary>
         /// Предмет.

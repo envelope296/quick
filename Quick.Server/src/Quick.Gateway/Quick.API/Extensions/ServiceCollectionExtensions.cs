@@ -57,6 +57,15 @@ namespace Quick.API.Extensions
 
         internal static IServiceCollection AddRepositoryImplementations(this IServiceCollection services)
         {
+            services.AddScoped<IGroupMemberRepository, GroupMemberRepository>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<ILessonRepository, LessonRepository>();
+            services.AddScoped<ILessonTypeRepository, LessonTypeRepository>();
+            services.AddScoped<IScheduleRepository, ScheduleRepository>();
+            services.AddScoped<ISubgroupRepository, SubgroupRepository>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<ITimeSlotRepository, TimeSlotRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
