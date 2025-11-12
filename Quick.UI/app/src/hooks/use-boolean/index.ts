@@ -1,1 +1,1 @@
-export { default as useBoolean } from './hook'
+export { useBoolean } from './hook'

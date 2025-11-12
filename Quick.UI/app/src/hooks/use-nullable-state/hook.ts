@@ -7,7 +7,7 @@ interface NullableStateModifier<T> {
     clear: VoidFunction,
 }
 
-function useNullableState<T>(initialState: T | null = null): [T | null, NullableStateModifier<T>] {
+export function useNullableState<T>(initialState: T | null = null): [T | null, NullableStateModifier<T>] {
     const [state, setState] = useState(initialState);
 
     const handleSet = (state: T) => setState(state);
@@ -21,5 +21,3 @@ function useNullableState<T>(initialState: T | null = null): [T | null, Nullable
         },
     ];
 };
-
-export default useNullableState;

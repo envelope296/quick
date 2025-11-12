@@ -1,0 +1,1 @@
+export { useAppRouting } from './hook';

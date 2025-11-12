@@ -1,1 +1,1 @@
-export { default as useNullableState } from './hook';
+export { useNullableState } from './hook';

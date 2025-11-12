@@ -7,7 +7,7 @@ interface BooleanStateModifier {
     setToggle: VoidFunction,
 }
 
-function useBoolean(initialState: boolean = false): [boolean, BooleanStateModifier] {
+export function useBoolean(initialState: boolean = false): [boolean, BooleanStateModifier] {
     const [state, setState] = useState(initialState);
 
     const handleTrue = () => setState(true);
@@ -23,5 +23,3 @@ function useBoolean(initialState: boolean = false): [boolean, BooleanStateModifi
         },
     ];
 };
-
-export default useBoolean;
