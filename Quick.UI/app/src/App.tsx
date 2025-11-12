@@ -1,35 +1,33 @@
 import { useState } from "react";
 import Select, { type ActionMeta, type OnChangeValue } from 'react-select';
 import { Button } from '@maxhub/max-ui';
-import { type ImpactStyle } from "@/models/web-app/haptic-feedback";
+import { type NotificationType } from "@/models/web-app/haptic-feedback";
 import * as AppContext from '@/services/app-context';
 
 export default function App() {
-  const [impactStyle, setImpactStyle] = useState<ImpactStyle>('light');
+  const [impactStyle, setImpactStyle] = useState<NotificationType>('error');
 
   interface ImpactStyleOption {
-    value: ImpactStyle,
+    value: NotificationType,
     label: string
   }
 
   const hapticOptions : ImpactStyleOption[] = [
-    { value: 'light', label: 'light' },
-    { value: 'medium', label: 'medium' },
-    { value: 'heavy', label: 'heavy' },
-    { value: 'rigid', label: 'rigid' },
-    { value: 'soft', label: 'soft' }
+    { value: 'error', label: 'error' },
+    { value: 'success', label: 'success' },
+    { value: 'warning', label: 'warning' },
   ]
 
   function hapticTest() {
     const webApp = AppContext.getWebApp();
-    webApp.HapticFeedback.impactOccurred(impactStyle, true);
+    webApp.HapticFeedback.notificationOccurred(impactStyle, false);
   }
 
   function onImpactStyleChange(newValue: OnChangeValue<ImpactStyleOption, false>, actionMeta: ActionMeta<ImpactStyleOption>) {
     if (newValue) {
       setImpactStyle(newValue.value);
     } else {
-      setImpactStyle('light');
+      setImpactStyle('error');
     }
   }
 
