@@ -5,6 +5,7 @@ import { type NotificationType } from "@/models/web-app/haptic-feedback";
 import * as AppContext from '@/services/app-context';
 
 export default function App() {
+  const [count, setCount] = useState<number>(0);
   const [impactStyle, setImpactStyle] = useState<NotificationType>('error');
 
   interface ImpactStyleOption {
@@ -31,6 +32,10 @@ export default function App() {
     }
   }
 
+  function onBackButtonClicked() {
+    setCount(count + 1);
+  }
+
   return (
     <div>
       <Button 
@@ -50,11 +55,22 @@ export default function App() {
         onClick={() => {
           const webApp = AppContext.getWebApp();
           webApp.BackButton.show();
-          webApp.BackButton.onClick(() => alert('Нажата кнопка назад'))
+          webApp.BackButton.onClick(onBackButtonClicked);
         }}
       >
         Включить кнопку "Назад"
       </Button>
+      <Button
+        onClick={() => {
+          const webApp = AppContext.getWebApp();
+          
+          webApp.BackButton.offClick(onBackButtonClicked);
+          webApp.BackButton.hide();
+        }}
+      >
+        Выключить кнопку "Назад"
+      </Button>
+      <p>Счетчик: {count}</p>
     </div>
   );
 }
