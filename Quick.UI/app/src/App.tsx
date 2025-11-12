@@ -22,7 +22,7 @@ export default function App() {
 
   function hapticTest() {
     const webApp = AppContext.getWebApp();
-    webApp.HapticFeedback.impactOccurred(impactStyle, false);
+    webApp.HapticFeedback.impactOccurred(impactStyle, true);
   }
 
   function onImpactStyleChange(newValue: OnChangeValue<ImpactStyleOption, false>, actionMeta: ActionMeta<ImpactStyleOption>) {
