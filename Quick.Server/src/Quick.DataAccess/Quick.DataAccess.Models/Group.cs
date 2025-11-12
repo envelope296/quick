@@ -13,11 +13,6 @@ namespace Quick.DataAccess.Models
         public required string Name { get; set; }
 
         /// <summary>
-        /// Описание группы.
-        /// </summary>
-        public string? Description { get; set; }
-
-        /// <summary>
         /// Признак: группа публичная.
         /// </summary>
         public bool IsPublic { get; set; }

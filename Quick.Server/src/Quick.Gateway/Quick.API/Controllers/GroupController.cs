@@ -59,14 +59,13 @@ namespace Quick.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateAsync([FromForm] CreateGroupRequest request, CancellationToken cancellationToken)
+        public async Task<ActionResult<Guid>> CreateAsync([FromBody] CreateGroupRequest request, CancellationToken cancellationToken)
         {
             var userContext = _userContextAccessor.GetCurrentOrFail();
             
             var group = new Group
             {
                 Name = request.Name,
-                Description = request.Description,
                 OwnerId =  userContext.UserId,
                 IsPublic = true
             };

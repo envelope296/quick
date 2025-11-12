@@ -1,13 +1,48 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { TestMain } from "@/components/pages/TestMain";
-import { TestChild } from "./components/pages/TestChild";
+import { HomePage } from "@/components/pages/HomePage";
+import * as appContext from '@/services/app-context';
+import * as userService from "@/services/user";
+import { useBoolean, useNullableState } from "./hooks";
+import { useEffect } from "react";
+import { ErrorView, type ErrorViewProps } from "./components/common/error-view";
 
 export function App() {
+  const [error, {set: setError}] = useNullableState<ErrorViewProps>();
+  const [isLoading, { setFalse: unsetIsLoading }] = useBoolean(true);
+
+  useEffect(() => {
+    async function initialize() {
+      try {
+        const webApp = appContext.getWebApp();
+        const token = await userService.getUserToken(webApp.initData);
+        webApp.SecureStorage.setItem('token', token);
+      }
+      catch {
+        setError({
+          title: "Ошибка соединения",
+          description: "Пожалуйста проверьте подключение к интернету и перезапустите мини-приложение"
+        });
+      }
+      finally {
+        unsetIsLoading();
+      }
+    }
+    
+    initialize();
+  }, []);
+
+  if (error != null) {
+    return <ErrorView {...error}></ErrorView>
+  }
+
+  if (isLoading) {
+    return <></>;
+  }
+  
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/*" element={<TestMain />} />
-        <Route path="/child/*" element={<TestChild />} />
+        <Route path="/*" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );
