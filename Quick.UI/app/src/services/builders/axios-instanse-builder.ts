@@ -8,7 +8,7 @@ export function buildAxiosInstanse(relativeUrl: string, useAuthorization: boolea
     }
     if (useAuthorization) {
         const webApp = appContext.getWebApp();
-        const token = webApp.SecureStorage.getItem('token');
+        const token = webApp.DeviceStorage.getItem('token');
         headers['Authorization'] = `Bearer ${token}`;
     }
     
