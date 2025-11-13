@@ -37,7 +37,7 @@ namespace Quick.API.Controllers
         {
             // TODO: Validation
 
-            var group = _groupRepository
+            var group = await _groupRepository
                 .Filter(groupId)
                 .Select(g => new GroupResponse
                 {
