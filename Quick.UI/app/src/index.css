@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ececec; 
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  border-radius: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 10px;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #007aff;
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #007aff;
+  border: 1px solid #007aff;
+  min-height: 49px;
+}

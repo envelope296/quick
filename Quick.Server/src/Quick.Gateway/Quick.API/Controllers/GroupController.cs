@@ -49,7 +49,6 @@ namespace Quick.API.Controllers
             {
                 Id = g.Id,
                 Name = g.Name,
-                Description = g.Description,
                 OwnerId = g.OwnerId,
                 IsPublic = g.IsPublic,
             })

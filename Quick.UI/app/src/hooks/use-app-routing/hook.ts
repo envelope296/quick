@@ -1,16 +1,17 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as AppContext from '@/services/app-context';
+import type { Supplier } from '@/types/functions';
 
-export function useAppRouting(previousPath: string | null = null) {
+export function useAppRouting(previousPath: Supplier<string> | null = null) {
     const navigate = useNavigate();
     const isRoot = previousPath == null;
 
-    const toPrevious = useCallback(() => {
+    const toPrevious = () => {
         if (previousPath != null) {
-            navigate(previousPath);
+            navigate(previousPath());
         }
-    }, [previousPath, navigate]);
+    }
 
     useEffect(() => {
         const webApp = AppContext.getWebApp();
@@ -23,5 +24,7 @@ export function useAppRouting(previousPath: string | null = null) {
                 webApp.BackButton.hide();
             };
         }
-    }, [isRoot, toPrevious]);
+    }, [isRoot]);
+
+    return toPrevious;
 }

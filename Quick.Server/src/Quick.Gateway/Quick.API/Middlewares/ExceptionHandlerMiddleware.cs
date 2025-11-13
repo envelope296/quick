@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Quick.BusinessLogic.Contracts.Exceptions.Common;
 using Quick.BusinessLogic.Contracts.Exceptions.Users;
-using Quick.BusinessLogic.Contracts.Responses;
+using Quick.BusinessLogic.Contracts.Responses.Error;
 using System.Net;
 using System.Net.Mime;
 using System.Text;

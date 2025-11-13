@@ -1,7 +1,7 @@
 services:
     quick-api:
         environment:
-            - ConnectionStrings__ApplicationDbContext=${ConnectionStrings__ApplicationDbContext-Host=quick-postgres;Port=5432;Database=quick;UserId=envelope;Password=envelope;Pooling=false;NoResetOnClose=true;}
+            - ConnectionStrings__ApplicationDbContext=${ConnectionStrings__ApplicationDbContext-Host=94.26.239.216;Port=47850;Database=quick;UserId=envelope;Password=envelope;Pooling=false;NoResetOnClose=true;}
         build:
             context: ./Quick.Server/src/
             dockerfile: ./Quick.Gateway/Quick.API/Dockerfile
@@ -13,7 +13,7 @@ services:
 
     quick-migrator:
         environment:
-            - ConnectionStrings__ApplicationDbContext=${ConnectionStrings__ApplicationDbContext-Host=quick-postgres;Port=5432;Database=quick;UserId=envelope;Password=envelope;Pooling=false;NoResetOnClose=true;}
+            - ConnectionStrings__ApplicationDbContext=${ConnectionStrings__ApplicationDbContext-Host=94.26.239.216;Port=47850;Database=quick;UserId=envelope;Password=envelope;Pooling=false;NoResetOnClose=true;}
         build:
             context: ./Quick.Server/src/
             dockerfile: ./Quick.DataAccess/Quick.DataAccess.Migrator/Dockerfile

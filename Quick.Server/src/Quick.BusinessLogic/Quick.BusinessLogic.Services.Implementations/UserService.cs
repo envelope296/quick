@@ -71,6 +71,13 @@ namespace Quick.BusinessLogic.Services.Implementations
                 await _userRepository.ExecuteAddAsync(newUser, cancellationToken);
                 return newUser.Id;
             }
+
+            user.FirstName = webAppUser.FirstName;
+            user.LastName = webAppUser.LastName;
+            user.UserName = webAppUser.Username;
+            user.PhotoUrl = webAppUser.PhotoUrl;
+
+            await _userRepository.SaveChangesAsync(cancellationToken);
             return user.Id;
         }
 
