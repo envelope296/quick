@@ -4,8 +4,11 @@ import CreatableSelect from "react-select/creatable";
 import styles from "./GroupCreatePage.module.css";
 import { useNullableState } from "@/hooks";
 import {type Option, createOption} from '@/types/common';
+import { useAppRouting } from "@/hooks/use-app-routing";
 
 export function GroupCreatePage() {
+  const toPrevios = useAppRouting(() => '/');
+
   const components = {
     DropdownIndicator: null,
   };
@@ -74,7 +77,10 @@ export function GroupCreatePage() {
           </div>
 
           <div className={styles.modalActions}>
-            <button className={`${styles.btn} ${styles.btnCancel}`}>
+            <button 
+              className={`${styles.btn} ${styles.btnCancel}`}
+              onClick={toPrevios}  
+            >
               Отмена
             </button>
             <button

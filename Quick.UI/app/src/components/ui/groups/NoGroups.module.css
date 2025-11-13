@@ -23,7 +23,7 @@
   width: 140px;
   height: 133px;
   object-fit: contain;
-  margin-top: 208px;
+  margin-top: 50px;
 }
 
 .text-content {
@@ -52,23 +52,10 @@
 }
 
 .button-group {
-  margin-top: 199px;
+  margin-top: 50px;
   margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   gap: 19px;
   width: 313px;
-}
-
-@media (max-width: 400px) {
-  #no-schedule-screen {
-    padding: 0;
-    align-items: flex-start;
-  }
-  .container {
-    border-radius: 0;
-    height: 100vh;
-    min-height: 757px;
-    max-width: 100%;
-  }
 }
