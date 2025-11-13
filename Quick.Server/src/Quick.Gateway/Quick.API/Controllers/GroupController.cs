@@ -90,7 +90,7 @@ namespace Quick.API.Controllers
                 University = request.University,
                 OwnerId =  userContext.UserId,
                 IsPublic = true,
-                Subgroups = request.Subroups.Select(name => 
+                Subgroups = request.Subgroups.Select(name => 
                     new Subgroup
                     {
                         Name = name
