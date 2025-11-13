@@ -1,7 +1,7 @@
 .groups-screen {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   min-height: 100vh;
   padding: 20px;
 }
@@ -16,7 +16,7 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
-  padding: 45px 20px;
+  padding: 25px 20px;
 }
 
 .icon {
@@ -42,6 +42,7 @@
 }
 
 .modalActions {
+  margin-top: 20px;
   display: flex;
   gap: 10px;
 }

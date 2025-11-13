@@ -18,20 +18,18 @@ export function GroupsView(props: GroupsViewProps) {
                 <div className={styles["text-content"]}>
                     <h1 className={styles.title}>Мои группы</h1>
                 </div>
-                <div>
-                    <div className={styles.modalActions}>
-                        <button 
-                            className={`${styles.btn} ${styles.btnAction}`}
-                            onClick={async () => await navigate('create-group')}
-                        >
-                            Добавить
-                        </button>
-                        <button
-                            className={`${styles.btn} ${styles.btnAction}`}
-                        >
-                            Присоединиться
-                        </button>
-                    </div>
+                <div className={styles.modalActions}>
+                    <button 
+                        className={`${styles.btn} ${styles.btnAction}`}
+                        onClick={async () => await navigate('create-group')}
+                    >
+                        Добавить
+                    </button>
+                    <button
+                        className={`${styles.btn} ${styles.btnAction}`}
+                    >
+                        Присоединиться
+                    </button>
                 </div>
             </div>
         </section>
