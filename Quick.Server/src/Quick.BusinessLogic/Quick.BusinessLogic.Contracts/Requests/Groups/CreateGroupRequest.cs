@@ -6,6 +6,6 @@
 
         public string? University { get; set; }
 
-        public List<string> Subroups { get; set; }
+        public List<string> Subgroups { get; set; } = new List<string>();
     }
 }
