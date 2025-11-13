@@ -6,8 +6,10 @@ import { useBoolean, useNullableState } from "@/hooks";
 import {type Option, createOption} from '@/types/common';
 import { useAppRouting } from "@/hooks/use-app-routing";
 import * as groupServise from "@/services/group";
+import { useNavigate } from "react-router-dom";
 
 export function GroupCreatePage() {
+  const navigate = useNavigate();
   const toPrevios = useAppRouting(() => '/');
 
   const components = {
@@ -65,6 +67,8 @@ export function GroupCreatePage() {
       subgroups: subgroupNames
     }
     const groupId = await groupServise.createGroup(request);
+
+    await navigate(`/groups/${groupId}`);
   }
 
   return (

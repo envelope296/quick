@@ -7,6 +7,11 @@ function api(): AxiosInstance {
     return api;
 }
 
+export async function get(id: string) {
+    const response = await api().get<GroupResponse>(`/${id}`);
+    return response.data;
+}
+
 export async function getPage(page: number, size: number): Promise<PageResponse<GroupResponse>> {
     const response = await api().get<PageResponse<GroupResponse>>(
         '/page', {

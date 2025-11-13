@@ -7,9 +7,9 @@ export function useAppRouting(previousPath: Supplier<string> | null = null) {
     const navigate = useNavigate();
     const isRoot = previousPath == null;
 
-    const toPrevious = () => {
+    const toPrevious = async () => {
         if (previousPath != null) {
-            navigate(previousPath());
+            await navigate(previousPath());
         }
     }
 
