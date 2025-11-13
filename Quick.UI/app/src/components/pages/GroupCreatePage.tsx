@@ -7,6 +7,8 @@ import {type Option, createOption} from '@/types/common';
 import { useAppRouting } from "@/hooks/use-app-routing";
 import * as groupServise from "@/services/group";
 import { useNavigate } from "react-router-dom";
+import AsyncCreatableSelect from "react-select/async-creatable";
+import * as dadataService from "@/services/dadata";
 
 export function GroupCreatePage() {
   const navigate = useNavigate();
@@ -46,9 +48,8 @@ export function GroupCreatePage() {
     }
   }
 
-  function onUniversityInputChanged(e: React.ChangeEvent<HTMLInputElement>) {
-    const newValue = e.target.value;
-    if (newValue === null || newValue === "") {
+  function onUniversityInputChanged(newValue: string | null | undefined) {
+    if (newValue ===undefined || newValue === null || newValue === "") {
       clearUniversity();
     }
     else {
@@ -71,6 +72,11 @@ export function GroupCreatePage() {
     await navigate(`/groups/${groupId}`);
   }
 
+  async function loadUniversities(query: string): Promise<Option[]> {
+    const response = await dadataService.suggestOrganizations(query, ["85.22"]);
+    return response.suggestions.map(s => createOption(s.value));
+  }
+
   return (
     <section className={styles.createGroupModal}>
       <div className={styles.modalCard}>
@@ -86,11 +92,17 @@ export function GroupCreatePage() {
               onChange={onGroupNameInputChanged}
             />
 
-            <input
-              type="text"
-              className={styles.inputField}
+            <AsyncCreatableSelect
+              isClearable
+              cacheOptions
+              loadOptions={loadUniversities}
+              classNames={{
+                control: () => styles.inputSelect,
+                multiValueLabel: () => styles.inputSelectLabel,
+                multiValueRemove: () => styles.inputSelectRemove,
+              }}
               placeholder="Университет"
-              onChange={onUniversityInputChanged}
+              onChange={(newValue, _) => onUniversityInputChanged(newValue?.value)}
             />
 
             <CreatableSelect
