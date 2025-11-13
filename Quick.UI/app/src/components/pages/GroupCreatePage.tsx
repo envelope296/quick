@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import CreatableSelect from "react-select/creatable";
 import styles from "./GroupCreatePage.module.css";
-import { useNullableState } from "@/hooks";
+import { useBoolean, useNullableState } from "@/hooks";
 import {type Option, createOption} from '@/types/common';
 import { useAppRouting } from "@/hooks/use-app-routing";
 
@@ -18,12 +18,15 @@ export function GroupCreatePage() {
   const [subgroupNames, setSubgroupNames] = useState<string[]>([]);
   const [subgroupNameOptions, setSubgroupNameOptions] = useState<Option[]>([]);
 
+  const [isCreateDisabled, { setTrue: setCreateDisabled, setFalse: unsetCreateDisabled }] = useBoolean(true);
+
   function onGroupNameInputChanged(e: React.ChangeEvent<HTMLInputElement>) {
     const newName = e.target.value;
     setGroupName(newName);
 
     if (newName === null || newName === "") {
       setSubgroupNameOptions([]);
+      setCreateDisabled();
       return;
     }
 
@@ -34,6 +37,7 @@ export function GroupCreatePage() {
       nameOptions.push(createOption(`${newName} (${i})`));
     }
     setSubgroupNameOptions(nameOptions);
+    unsetCreateDisabled();
   }
 
   return (
@@ -84,6 +88,7 @@ export function GroupCreatePage() {
               Отмена
             </button>
             <button
+              disabled={isCreateDisabled}
               className={`${styles.btn} ${styles.btnCreate}`}
               onClick={() => {}}
             >

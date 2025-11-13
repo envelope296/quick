@@ -129,17 +129,6 @@
   color: #ffffff;
 }
 
-@media (max-width: 400px) {
-  .modalCard {
-    padding: 30px 15px 25px;
-  }
-
-  .closeButton {
-    top: -14px;
-    right: -4px;
-  }
-
-  .formGroup {
-    margin-bottom: 40px;
-  }
+.btnCreate:disabled {
+  background-color: #c9cccf;
 }
