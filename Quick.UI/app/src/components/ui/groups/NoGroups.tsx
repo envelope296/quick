@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './NoGroups.module.css';
-import GroupIcon from '@/assets/group.svg?component';
+import GroupIcon from '@/assets/group.svg?react';
 
 export function NoGroups() {
     const navigate = useNavigate();
