@@ -15,7 +15,7 @@ export function GroupCreatePage() {
   };
 
   const [groupName, {set: setGroupName, clear: clearGroupName}] = useNullableState<string>();
-  const [subgroupNames, setSubgroupNames] = useState<readonly string[]>([]);
+  const [subgroupNames, setSubgroupNames] = useState<string[]>([]);
   const [university, {set: setUniversity, clear: clearUniversity}] = useNullableState<string>();
   
   const [subgroupNameOptions, setSubgroupNameOptions] = useState<Option[]>([]);
@@ -119,14 +119,14 @@ export function GroupCreatePage() {
             <button
               disabled={isCreateDisabled}
               className={`${styles.btn} ${styles.btnCreate}`}
-              onClick={() => {}}
+              onClick={onCreatePressed}
             >
               Создать
             </button>
           </div>
         </main>
       </div>
-      
+
       {subgroupNames.map(n => <p>{n}</p>)}
 
     </section>
