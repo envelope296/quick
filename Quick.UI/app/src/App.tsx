@@ -45,6 +45,9 @@ export function App() {
       <Routes>
         <Route path="/*" element={<HomePage />} />
         <Route path="/create-group/*" element={<GroupCreatePage />} />
+        <Route path="/groups/:id" element={<GroupCreatePage />} >
+          
+        </Route>
       </Routes>
     </BrowserRouter>
   );

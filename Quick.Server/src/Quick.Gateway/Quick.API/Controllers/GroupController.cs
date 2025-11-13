@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Quick.DataAccess.Context.Extensions;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Quick.BusinessLogic.Contracts.Exceptions.Common;
 using Quick.BusinessLogic.Contracts.Requests.Groups;
 using Quick.BusinessLogic.Contracts.Responses.Common;
 using Quick.BusinessLogic.Contracts.Responses.Groups;
 using Quick.BusinessLogic.Repositories.Abstractions;
 using Quick.Common.Context.UserContext;
+using Quick.DataAccess.Context.Extensions;
 using Quick.DataAccess.Models;
 
 namespace Quick.API.Controllers
@@ -27,6 +30,25 @@ namespace Quick.API.Controllers
             _userContextAccessor = userContextAccessor;
             _groupRepository = groupRepository;
             _groupMemberRepository = groupMemberRepository;
+        }
+
+        [HttpGet("{groupId:guid}")]
+        public async Task<ActionResult<GroupResponse>> GetAsync([FromRoute] Guid groupId, CancellationToken cancellationToken)
+        {
+            // TODO: Validation
+
+            var group = _groupRepository
+                .Filter(groupId)
+                .Select(g => new GroupResponse
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    OwnerId = g.OwnerId,
+                    IsPublic = g.IsPublic,
+                })
+                .FirstOrDefaultAsync(cancellationToken) ?? throw new EntityNotFoundException("Группа не найдена");
+
+            return Ok(group);
         }
 
         [HttpGet("page")]

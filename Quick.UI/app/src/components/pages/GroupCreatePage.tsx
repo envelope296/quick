@@ -64,7 +64,7 @@ export function GroupCreatePage() {
       university: university,
       subgroups: subgroupNames
     }
-    await groupServise.createGroup(request);
+    const groupId = await groupServise.createGroup(request);
   }
 
   return (
@@ -126,9 +126,6 @@ export function GroupCreatePage() {
           </div>
         </main>
       </div>
-
-      {subgroupNames.map(n => <p>{n}</p>)}
-
     </section>
   );
 }
