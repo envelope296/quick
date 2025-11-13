@@ -5,6 +5,7 @@ import styles from "./GroupCreatePage.module.css";
 import { useBoolean, useNullableState } from "@/hooks";
 import {type Option, createOption} from '@/types/common';
 import { useAppRouting } from "@/hooks/use-app-routing";
+import * as groupServise from "@/services/group";
 
 export function GroupCreatePage() {
   const toPrevios = useAppRouting(() => '/');
@@ -13,31 +14,57 @@ export function GroupCreatePage() {
     DropdownIndicator: null,
   };
 
-  const [groupName, {set: setGroupName}] = useNullableState<string>();
-
-  const [subgroupNames, setSubgroupNames] = useState<string[]>([]);
+  const [groupName, {set: setGroupName, clear: clearGroupName}] = useNullableState<string>();
+  const [subgroupNames, setSubgroupNames] = useState<readonly string[]>([]);
+  const [university, {set: setUniversity, clear: clearUniversity}] = useNullableState<string>();
+  
   const [subgroupNameOptions, setSubgroupNameOptions] = useState<Option[]>([]);
-
   const [isCreateDisabled, { setTrue: setCreateDisabled, setFalse: unsetCreateDisabled }] = useBoolean(true);
 
   function onGroupNameInputChanged(e: React.ChangeEvent<HTMLInputElement>) {
-    const newName = e.target.value;
-    setGroupName(newName);
+    const newValue = e.target.value;
 
-    if (newName === null || newName === "") {
+    if (newValue === null || newValue === "") {
+      clearGroupName();
       setSubgroupNameOptions([]);
       setCreateDisabled();
+    }
+    else {
+      setGroupName(newValue);
+
+      const optionsCount = 2;
+      const nameOptions: Option[] = [];
+
+      for (var i = 1; i <= optionsCount; i++) {
+        nameOptions.push(createOption(`${newValue} (${i})`));
+      }
+      setSubgroupNameOptions(nameOptions);
+      
+      unsetCreateDisabled();
+    }
+  }
+
+  function onUniversityInputChanged(e: React.ChangeEvent<HTMLInputElement>) {
+    const newValue = e.target.value;
+    if (newValue === null || newValue === "") {
+      clearUniversity();
+    }
+    else {
+      setUniversity(newValue);
+    }
+  }
+
+  async function onCreatePressed() {
+    if (groupName === null || groupName === "") {
       return;
     }
 
-    const optionsCount = 2;
-    const nameOptions: Option[] = [];
-
-    for (var i = 1; i <= optionsCount; i++) {
-      nameOptions.push(createOption(`${newName} (${i})`));
+    const request = {
+      name: groupName,
+      university: university,
+      subgroups: subgroupNames
     }
-    setSubgroupNameOptions(nameOptions);
-    unsetCreateDisabled();
+    await groupServise.createGroup(request);
   }
 
   return (
@@ -59,6 +86,7 @@ export function GroupCreatePage() {
               type="text"
               className={styles.inputField}
               placeholder="Университет"
+              onChange={onUniversityInputChanged}
             />
 
             <CreatableSelect
@@ -72,6 +100,7 @@ export function GroupCreatePage() {
               options={subgroupNameOptions}
               noOptionsMessage={() => "Введите название подгруппы"}
               formatCreateLabel={(value) => `Добавить ${value}`}
+              onChange={(newValue) => setSubgroupNames(newValue.map(opt => opt.value))}
               classNames={{
                 control: () => styles.inputSelect,
                 multiValueLabel: () => styles.inputSelectLabel,
@@ -97,6 +126,9 @@ export function GroupCreatePage() {
           </div>
         </main>
       </div>
+      
+      {subgroupNames.map(n => <p>{n}</p>)}
+
     </section>
   );
 }

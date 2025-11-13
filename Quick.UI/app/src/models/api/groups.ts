@@ -14,4 +14,6 @@ export interface AddGroupMemberRequest {
 
 export interface CreateGroupRequest {
   name: string;
+  university: string | null;
+  subgroups: string[]
 }
