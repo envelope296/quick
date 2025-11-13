@@ -1,0 +1,39 @@
+
+import type { GroupResponse } from '@/models/api';
+import GroupIcon from '@/assets/group.svg?react';
+import styles from './NoGroups.module.css';
+import { useNavigate } from 'react-router-dom';
+
+interface GroupsViewProps {
+    groups: GroupResponse[]
+}
+
+export function GroupsView(props: GroupsViewProps) {
+    const navigate = useNavigate();
+
+    return (
+        <section className={styles["groups-screen"]}>
+            <div className={styles.container}>
+                <GroupIcon className={styles["icon"]} />
+                <div className={styles["text-content"]}>
+                    <h1 className={styles.title}>Мои группы</h1>
+                </div>
+                <div>
+                    <div className={styles.modalActions}>
+                        <button 
+                            className={`${styles.btn} ${styles.btnAction}`}
+                            onClick={async () => await navigate('create-group')}
+                        >
+                            Добавить
+                        </button>
+                        <button
+                            className={`${styles.btn} ${styles.btnAction}`}
+                        >
+                            Присоединиться
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}

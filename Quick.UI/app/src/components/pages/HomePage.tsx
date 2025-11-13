@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import type { GroupResponse } from '@/models/api';
 import { useAppRouting } from '@/hooks/use-app-routing';
 import { NoGroups } from '../ui/groups/NoGroups';
+import { GroupsView } from '../ui/groups/GroupsView';
 
 export function HomePage() {
     useAppRouting();
@@ -27,5 +28,5 @@ export function HomePage() {
         return <NoGroups />
     }
 
-    return <h1>Мои группы</h1>;
+    return <GroupsView groups={groups} />
 }
