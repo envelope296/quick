@@ -7,9 +7,10 @@ export function buildAxiosInstanse(relativeUrl: string, useAuthorization: boolea
         'Content-Type': 'application/json'
     }
     if (useAuthorization) {
-        const webApp = appContext.getWebApp();
-        const token = webApp.DeviceStorage.getItem('token');
-        headers['Authorization'] = `Bearer ${token}`;
+        const token = appContext.getUserToken();
+        if (token !== null) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
     }
     
     const api = axios.create({

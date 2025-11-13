@@ -16,7 +16,7 @@ export function App() {
       try {
         const webApp = appContext.getWebApp();
         const token = await userService.getUserToken(webApp.initData);
-        webApp.DeviceStorage.setItem('token', token);
+        appContext.setUserToken(token);
       }
       catch {
         setError({
