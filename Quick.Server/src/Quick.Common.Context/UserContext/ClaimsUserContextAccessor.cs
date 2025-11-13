@@ -27,7 +27,7 @@ namespace Quick.Common.Context.UserContext
             }
 
             var isAuthenticated = user.Identity?.IsAuthenticated ?? false;
-            if (isAuthenticated)
+            if (!isAuthenticated)
             {
                 return null;
             }
