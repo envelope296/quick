@@ -16,13 +16,13 @@
   align-items: center;
   text-align: center;
   overflow: hidden;
+  padding: 45px 20px;
 }
 
 .icon {
   width: 140px;
   height: 133px;
   object-fit: contain;
-  margin-top: 50px;
 }
 
 .text-content {
@@ -52,9 +52,7 @@
 
 .button-group {
   margin-top: 50px;
-  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   gap: 19px;
-  width: 95%;
 }
