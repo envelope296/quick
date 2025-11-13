@@ -15,7 +15,7 @@ namespace Quick.DataAccess.Models
         /// <summary>
         /// Идентификатор группы.
         /// </summary>
-        public required Guid GroupId { get; set; }
+        public Guid GroupId { get; set; }
 
         /// <summary>
         /// Группа.

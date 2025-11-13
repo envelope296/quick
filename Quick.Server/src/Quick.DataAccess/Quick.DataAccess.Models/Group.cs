@@ -12,6 +12,8 @@ namespace Quick.DataAccess.Models
         /// </summary>
         public required string Name { get; set; }
 
+        public string? University { get; set; }
+
         /// <summary>
         /// Признак: группа публичная.
         /// </summary>

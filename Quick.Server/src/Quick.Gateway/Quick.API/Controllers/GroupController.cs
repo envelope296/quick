@@ -65,8 +65,14 @@ namespace Quick.API.Controllers
             var group = new Group
             {
                 Name = request.Name,
+                University = request.University,
                 OwnerId =  userContext.UserId,
-                IsPublic = true
+                IsPublic = true,
+                Subgroups = request.Subroups.Select(name => 
+                    new Subgroup
+                    {
+                        Name = name
+                    }).ToList()
             };
             await _groupRepository.ExecuteAddAsync(group, cancellationToken);
             
