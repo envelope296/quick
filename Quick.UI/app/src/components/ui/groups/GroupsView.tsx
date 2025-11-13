@@ -1,7 +1,7 @@
 
 import type { GroupResponse } from '@/models/api';
 import GroupIcon from '@/assets/group.svg?react';
-import styles from './NoGroups.module.css';
+import styles from './GroupsView.module.css';
 import { useNavigate } from 'react-router-dom';
 
 interface GroupsViewProps {
