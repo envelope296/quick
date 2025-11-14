@@ -64,6 +64,7 @@ body {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
+  text-align: center;
 }
 
 .input-select-label {
