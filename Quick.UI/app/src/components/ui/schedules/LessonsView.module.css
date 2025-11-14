@@ -89,12 +89,12 @@
 }
 
 .lessonInfo > h1 {
-  font-size: 16pt;
+  font-size: 14pt;
   font-weight: 500;
 }
 
 .lessonInfo > p {
-  font-size: 14pt;
+  font-size: 12pt;
   font-weight: 200;
   color: #757575;
 }
