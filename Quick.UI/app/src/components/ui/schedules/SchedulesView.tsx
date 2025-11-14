@@ -38,9 +38,12 @@ export function SchedulesView({group, schedules}: SchedulesViewProps) {
                 }
             </div>
             <div className={`${styles.container} ${styles.groupsContainer}`}>
-                {schedules.map(g => 
-                    <button className={styles.groupItem} onClick={() => navigate(`/groups/${g.id}`)}>
-                        {g.name}
+                {schedules.map(s => 
+                    <button 
+                        className={styles.groupItem} 
+                        onClick={() => navigate(`/groups/${group.id}/schedules/${s.id}`)}
+                    >
+                        {s.name}
                     </button>
                 )}
             </div>
