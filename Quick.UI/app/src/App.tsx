@@ -52,8 +52,8 @@ export function App() {
         <Route path="/join-group/*" element={<GroupJoinPage />} />
         <Route path="/groups/:id" element={<GroupPage />} >
           <Route index element={<SchedulesPage />} />
-          <Route path="/schedules/*" element={<SchedulesPage />} />
-          <Route path="/create-schedule/*" element={<ScheduleCreatePage />} />
+          <Route path="schedules/*" element={<SchedulesPage />} />
+          <Route path="create-schedule/*" element={<ScheduleCreatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
