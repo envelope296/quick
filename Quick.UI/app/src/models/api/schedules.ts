@@ -3,6 +3,11 @@ export enum ScheduleType {
     Biweekly = 1
 }
 
+export enum WeekType {
+    Even = 0,
+    Odd = 1
+}
+
 export interface ScheduleResponse {
     id: string;
     name: string;

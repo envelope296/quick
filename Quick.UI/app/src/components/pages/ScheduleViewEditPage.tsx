@@ -5,7 +5,7 @@ import * as scheduleServise from "@/services/schedule"
 import * as subgroupService from "@/services/subgroup";
 import { Loading } from "../common/Loading";
 import { useNullableState } from "@/hooks";
-import type { ScheduleResponse } from "@/models/api/schedules";
+import { ScheduleType, WeekType, type ScheduleResponse } from "@/models/api/schedules";
 import { useEffect, useState } from "react";
 import { Switcher } from "../common/Switcher";
 import { createEntityOption, type EntityOption } from "@/types/common";
@@ -16,6 +16,11 @@ interface ScheduleViewEditPageContext {
     group: GroupResponse;
 }
 
+interface WeekTypeOption {
+    value: string;
+    type: WeekType
+}
+
 export function ScheduleViewEditPage() {
     useAppRouting(() => `/groups/${group.id}`);
 
@@ -23,7 +28,10 @@ export function ScheduleViewEditPage() {
     const [schedule, {set: setSchedule}] = useNullableState<ScheduleResponse>();
     
     const [subgroupsOptions, {set: setSubgroupsOptions}] = useNullableState<EntityOption[]>();
+    const weekTypeOptions = [{value: "Чётная", type: WeekType.Even}, {value: "Нечётная", type: WeekType.Odd}];
+
     const [selectedSubgroup, {set: setSelectedSubgroup, clear: clearSelectedSubgroup}] = useNullableState<EntityOption>();
+    const [selectedWeekType, {set: setSelectedWeekType, clear: clearSelectedWeekType}] = useNullableState<WeekTypeOption>();
     
     const params = useParams();
     const scheduleId = params.scheduleId;
@@ -75,7 +83,25 @@ export function ScheduleViewEditPage() {
                         }
                     }}
                 />
-                </div>
+                {isEdit && schedule.type == ScheduleType.Biweekly &&
+                    <Select
+                        isClearable
+                        options={weekTypeOptions}
+                        classNames={{
+                            control: () => "input-select"
+                        }}
+                        placeholder="Неделя"
+                        onChange={(newValue, _) => {
+                            if (newValue == null) {
+                                clearSelectedWeekType();
+                            }
+                            else {
+                                setSelectedWeekType(newValue);
+                            }
+                        }}
+                    />
+                }
+            </div>
         </div>
         {group.isUserOwner &&
             <Switcher 

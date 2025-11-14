@@ -72,7 +72,7 @@ export function ScheduleCreatePage() {
                         <div className={styles.switcherBox}>
                             <p className={styles.switcherLabel}>Раздление на чётные/нёчетные недели</p>
                             <Switcher
-                                defaultState={true}
+                                defaultState={false}
                                 trueMessage="Есть"
                                 falseMessage="Нет"
                                 onChange={(value) => {
