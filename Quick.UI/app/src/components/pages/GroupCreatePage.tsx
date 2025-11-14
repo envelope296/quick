@@ -94,6 +94,7 @@ export function GroupCreatePage() {
             />
 
             <AsyncCreatableSelect
+              createOptionPosition="first"
               isClearable
               cacheOptions
               loadOptions={loadUniversities}
@@ -102,10 +103,12 @@ export function GroupCreatePage() {
               }}
               placeholder="Университет"
               onChange={(newValue, _) => onUniversityInputChanged(newValue?.value)}
+              formatCreateLabel={(value) => value}
+              noOptionsMessage={() => "Введите название университета"}
             />
 
             <CreatableSelect
-              components={components}
+              createOptionPosition="first"
               isMulti
               isClearable
               placeholder="Подгруппы"
@@ -114,7 +117,7 @@ export function GroupCreatePage() {
               openMenuOnFocus={subgroupNameOptions.length != 0}
               options={subgroupNameOptions}
               noOptionsMessage={() => "Введите название подгруппы"}
-              formatCreateLabel={(value) => `Добавить ${value}`}
+              formatCreateLabel={(value) => value}
               onChange={(newValue) => setSubgroupNames(newValue.map(opt => opt.value))}
               classNames={{
                 control: () => "input-select",
