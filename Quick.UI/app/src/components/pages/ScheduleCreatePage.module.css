@@ -1,0 +1,83 @@
+.createScheduleModal {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.modalCard {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 361px;
+  padding: 45px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader {
+  position: relative;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.modalTitle {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.22;
+  color: #000000;
+  margin: 0;
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.modalActions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 37px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.22;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.btnCancel {
+  background-color: transparent;
+  color: #007aff;
+}
+
+.btnCreate {
+  background-color: #007aff;
+  color: #ffffff;
+}
+
+.btnCreate:disabled {
+  background-color: #c9cccf;
+}

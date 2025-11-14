@@ -55,7 +55,7 @@ export function ScheduleCreatePage() {
     }
 
     return (
-        <section className={styles.createGroupModal}>
+        <section className={styles.createScheduleModal}>
             <div className={styles.modalCard}>
                 <header className={styles.modalHeader}>
                     <h1 className={styles.modalTitle}>Создание расписания</h1>
