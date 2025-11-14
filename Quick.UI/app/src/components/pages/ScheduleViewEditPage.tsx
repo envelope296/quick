@@ -64,6 +64,14 @@ export function ScheduleViewEditPage() {
     }
 
     return <section className={styles.screen}>
+        {group.isUserOwner &&
+            <Switcher 
+                defaultState={!defaultIsEdit}
+                trueMessage="Просмотр"
+                falseMessage="Редактирование"
+                onChange={(v) => setIsEdit(!v)}
+            />
+        }
         <div className={styles.container}>
             <header className={styles.modalHeader}>
                 <h1 className={styles.modalTitle}>{schedule.name}</h1>
@@ -106,13 +114,5 @@ export function ScheduleViewEditPage() {
                 }
             </div>
         </div>
-        {group.isUserOwner &&
-            <Switcher 
-                defaultState={!defaultIsEdit}
-                trueMessage="Просмотр"
-                falseMessage="Редактирование"
-                onChange={(v) => setIsEdit(!v)}
-            />
-        }
     </section>
 }
