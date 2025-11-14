@@ -5,7 +5,8 @@ export interface Option {
 
 export interface EntityOption {
   label: string,
-  id: string
+  id: string,
+  value: string
 }
 
 export function createOption(label: string): Option {
@@ -18,6 +19,7 @@ export function createOption(label: string): Option {
 export function createEntityOption(label: string, id: string): EntityOption {
   return {
     label,
-    id
+    id,
+    value: label
   }
 }
