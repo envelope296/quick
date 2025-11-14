@@ -8,6 +8,10 @@
   gap: 20px;
 }
 
+.screen > div {
+  max-width: 361px;
+}
+
 .container {
   background-color: #ffffff;
   border-radius: 30px;
