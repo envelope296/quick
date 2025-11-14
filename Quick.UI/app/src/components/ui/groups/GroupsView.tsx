@@ -21,7 +21,7 @@ export function GroupsView(props: GroupsViewProps) {
                 <div className={styles.modalActions}>
                     <button 
                         className={`${styles.btn} ${styles.btnAction}`}
-                        onClick={() => navigate('create-group')}
+                        onClick={() => navigate('/create-group')}
                     >
                         Добавить
                     </button>
