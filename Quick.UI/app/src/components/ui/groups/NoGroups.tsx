@@ -14,8 +14,18 @@ export function NoGroups() {
                     <p className={styles.subtitle}>Пока что вы не состоите ни в одной группе.</p>
                 </div>
                 <div className={styles["button-group"]}>
-                    <button onClick={() => navigate('/create-group')} className="btn btn-primary">Создать группу</button>
-                    <button className="btn btn-secondary">Присоединиться к группе</button>
+                    <button 
+                        onClick={() => navigate('/create-group')} 
+                        className="btn btn-primary"
+                    >
+                        Создать группу
+                    </button>
+                    <button 
+                        className="btn btn-secondary"
+                        onClick={() => navigate('/join-group')}
+                    >
+                        Присоединиться к группе
+                    </button>
                 </div>
             </div>
         </section>

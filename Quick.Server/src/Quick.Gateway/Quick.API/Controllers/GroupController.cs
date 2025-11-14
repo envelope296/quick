@@ -156,6 +156,33 @@ namespace Quick.API.Controllers
             return Ok(groupMembers);
         }
 
+        [HttpGet("{groupId:guid}/join")]
+        public async Task<ActionResult<JoinGroupResponse>> JoinAsync(
+            [FromRoute] Guid groupId,
+            CancellationToken cancellationToken)
+        {
+            var userContext = _userContextAccessor.GetCurrentOrFail();
+
+            var isOwnerOrMember = await _groupRepository.CheckIfExistsAsync(g => 
+                g.Id == groupId && 
+                (g.OwnerId == userContext.UserId || g.Members.Any(gm => gm.UserId == userContext.UserId)),
+            cancellationToken);
+
+            if (isOwnerOrMember)
+            {
+                return Ok(JoinGroupResponse.Error(groupId, "Вы уже состоите в группе"));
+            }
+
+            var groupMember = new GroupMember
+            {
+                GroupId = groupId,
+                UserId = userContext.UserId
+            };
+            await _groupMemberRepository.ExecuteAddAsync(groupMember, cancellationToken);
+
+            return Ok(JoinGroupResponse.Success(groupId));
+        }
+
         [HttpPost("members")]
         public async Task<ActionResult> AddMemberAsync([FromBody] AddGroupMemberRequest request, CancellationToken cancellationToken)
         {

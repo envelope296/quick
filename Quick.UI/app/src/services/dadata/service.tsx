@@ -12,9 +12,21 @@ const api = axios.create({
 })
 
 export async function suggestOrganizations(query: string, okved: string[]): Promise<SuggestionsResponse> {
-    const response = await api.post<SuggestionsResponse>("", {
-        query,
-        okved
-    })
-    return response.data;
+    try {
+        const response = await api.post<SuggestionsResponse>("", {
+            query,
+            okved
+        })
+        return response.data;
+    }
+    catch {
+        return {
+            suggestions: []
+        }
+    }
+}
+
+export async function suggestUniversities(query: string): Promise<SuggestionsResponse> {
+    const response = await suggestOrganizations(query, ["85.22"]);
+    return response;
 }

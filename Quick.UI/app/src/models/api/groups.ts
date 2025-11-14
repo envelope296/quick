@@ -3,7 +3,21 @@ export interface GroupResponse {
     name: string;
     description?: string | null;
     ownerId: number | null;
+    isUserOwner: boolean;
     isPublic: boolean;
+}
+
+export interface SearchGroupsRequest {
+  query: string,
+  university: string,
+  page: number,
+  size: number
+}
+
+export interface JoinGroupResponse {
+  groupId: string,
+  isSuccess: boolean,
+  errorMessage: string | null
 }
 
 export interface AddGroupMemberRequest {

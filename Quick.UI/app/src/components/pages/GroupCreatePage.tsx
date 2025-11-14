@@ -70,7 +70,7 @@ export function GroupCreatePage() {
   }
 
   async function loadUniversities(query: string): Promise<Option[]> {
-    const response = await dadataService.suggestOrganizations(query, ["85.22"]);
+    const response = await dadataService.suggestUniversities(query);
     return response.suggestions.map(s => createOption(s.value));
   }
 

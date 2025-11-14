@@ -1,6 +1,6 @@
 ﻿using Quick.BusinessLogic.Contracts.Requests.Base;
 
-namespace Quick.BusinessLogic.Contracts.Responses.Groups
+namespace Quick.BusinessLogic.Contracts.Requests.Groups
 {
     public class SearchGroupsRequest : BasePageRequest
     {

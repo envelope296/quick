@@ -1,6 +1,6 @@
 import { type AxiosInstance } from "axios";
 import { buildAxiosInstanse } from "../builders";
-import type { AddGroupMemberRequest, CreateGroupRequest, GroupResponse, PageResponse } from "@/models/api";
+import type { AddGroupMemberRequest, CreateGroupRequest, GroupResponse, JoinGroupResponse, PageResponse, SearchGroupsRequest } from "@/models/api";
 
 function api(): AxiosInstance {
     const api = buildAxiosInstanse('/v1/groups', true);
@@ -23,8 +23,18 @@ export async function getPage(page: number, size: number): Promise<PageResponse<
     return response.data;
 }
 
+export async function search(request: SearchGroupsRequest): Promise<PageResponse<GroupResponse>> {
+    const response = await api().post<PageResponse<GroupResponse>>('/search', request);
+    return response.data;
+}
+
 export async function createGroup(request: CreateGroupRequest): Promise<string> {
     const response = await api().post<string>('/', request);
+    return response.data;
+}
+
+export async function join(groupId: string): Promise<JoinGroupResponse> {
+    const response = await api().get<JoinGroupResponse>(`/${groupId}/join`);
     return response.data;
 }
 

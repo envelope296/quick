@@ -27,6 +27,7 @@ export function GroupsView(props: GroupsViewProps) {
                     </button>
                     <button
                         className={`${styles.btn} ${styles.btnAction}`}
+                        onClick={() => navigate('/join-group')}
                     >
                         Присоединиться
                     </button>
