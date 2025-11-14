@@ -10,12 +10,15 @@ import { useEffect, useState } from "react";
 import { Switcher } from "../common/Switcher";
 import { createEntityOption, type EntityOption } from "@/types/common";
 import Select from "react-select";
+import { useAppRouting } from "@/hooks/use-app-routing";
 
 interface ScheduleViewEditPageContext {
     group: GroupResponse;
 }
 
 export function ScheduleViewEditPage() {
+    useAppRouting(() => `/groups/${group.id}`);
+
     const { group } = useOutletContext<ScheduleViewEditPageContext>();
     const [schedule, {set: setSchedule}] = useNullableState<ScheduleResponse>();
     
