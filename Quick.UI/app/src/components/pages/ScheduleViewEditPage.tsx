@@ -17,8 +17,8 @@ interface ScheduleViewEditPageContext {
 }
 
 interface WeekTypeOption {
-    value: string;
-    type: WeekType
+    label: string;
+    value: WeekType;
 }
 
 export function ScheduleViewEditPage() {
@@ -28,7 +28,10 @@ export function ScheduleViewEditPage() {
     const [schedule, {set: setSchedule}] = useNullableState<ScheduleResponse>();
     
     const [subgroupsOptions, {set: setSubgroupsOptions}] = useNullableState<EntityOption[]>();
-    const weekTypeOptions = [{value: "Чётная", type: WeekType.Even}, {value: "Нечётная", type: WeekType.Odd}];
+    const weekTypeOptions = [
+        {label: "Чётная", value: WeekType.Even}, 
+        {label: "Нечётная", value: WeekType.Odd}
+    ];
 
     const [selectedSubgroup, {set: setSelectedSubgroup, clear: clearSelectedSubgroup}] = useNullableState<EntityOption>();
     const [selectedWeekType, {set: setSelectedWeekType, clear: clearSelectedWeekType}] = useNullableState<WeekTypeOption>();
@@ -108,7 +111,7 @@ export function ScheduleViewEditPage() {
                 defaultState={!defaultIsEdit}
                 trueMessage="Просмотр"
                 falseMessage="Редактирование"
-                onChange={(v) => setIsEdit(v!)}
+                onChange={(v) => setIsEdit(!v)}
             />
         }
     </section>
