@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { ErrorView, type ErrorViewProps } from "./components/common/error-view";
 import { GroupCreatePage } from "@/components/pages/GroupCreatePage";
 import { GroupPage } from "./components/pages/GroupPage";
+import { SchedulesPage } from "./components/pages/SchedulesPage";
 
 export function App() {
   const [error, {set: setError}] = useNullableState<ErrorViewProps>();
@@ -47,7 +48,7 @@ export function App() {
         <Route path="/*" element={<HomePage />} />
         <Route path="/create-group/*" element={<GroupCreatePage />} />
         <Route path="/groups/:id" element={<GroupPage />} >
-          <Route index element={<p>Расписания</p>} />
+          <Route index element={<SchedulesPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

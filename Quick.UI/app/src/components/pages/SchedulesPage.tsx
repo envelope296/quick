@@ -1,6 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useAppRouting } from "@/hooks/use-app-routing";
 
 export function SchedulesPage() {
-    const params = useParams();
-    const groupId = params.groupId;
+    useAppRouting(() => "/");
+
+    return <div>
+        Расписания
+    </div>
 }
