@@ -70,6 +70,7 @@ export function ScheduleViewEditPage() {
                             setSelectedSubgroup(newValue);
                         }
                     }}
+                    value={selectedSubgroup}
                 />
                 </div>
         </div>
