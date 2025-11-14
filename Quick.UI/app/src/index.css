@@ -78,10 +78,6 @@ body {
   background-color: #c9cccf;
 }
 
-.input-select::placeholder {
-  color: red;
-}
-
 .input-select:focus-within {
   background-color: #c9cccf !important;
 }

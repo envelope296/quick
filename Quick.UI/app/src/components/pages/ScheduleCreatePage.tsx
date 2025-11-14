@@ -69,6 +69,7 @@ export function ScheduleCreatePage() {
                             placeholder="Название"
                             onChange={onScheduleNameInputChanged}
                         />
+                        <p>Раздление на четные/нечетные недели</p>
                         <Switcher
                             defaultState={true}
                             trueMessage="Есть"

@@ -1,10 +1,11 @@
 .switcher {
   display: flex;
   flex-direction: row;
-  height: 30px;
-  padding: 3px;
+  height: 40px;
+  padding: 5px;
   background-color: #ededed;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .switcherBtn {
@@ -15,11 +16,12 @@
   cursor: pointer;
   border-radius: 8px;
   background-color: transparent;
-  color: black;
+  color: #757575;
   border: none;
 }
 
 .switcherBtn:disabled {
   cursor: default;
   background-color: white;
+  color: black;
 }
