@@ -108,7 +108,7 @@ export function ScheduleViewEditPage() {
                 defaultState={!defaultIsEdit}
                 trueMessage="Просмотр"
                 falseMessage="Редактирование"
-                onChange={setIsEdit}
+                onChange={(v) => setIsEdit(v!)}
             />
         }
     </section>
