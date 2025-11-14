@@ -21,6 +21,10 @@
   padding: 25px 20px;
 }
 
+.groupsContainer {
+  gap: 15px;
+}
+
 .icon {
   width: 140px;
   height: 133px;
@@ -75,11 +79,13 @@
   align-items: center;
   height: 37px;
   border-radius: 10px;
-  border: none;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.22;
   cursor: pointer;
   padding: 10px;
   width: 100%;
+  background-color: transparent;
+  color: #007aff;
+  border: 1px solid #007aff;
 }

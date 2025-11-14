@@ -32,7 +32,7 @@ export function GroupsView(props: GroupsViewProps) {
                     </button>
                 </div>
             </div>
-            <div className={styles.container}>
+            <div className={`${styles.container} ${styles.groupsContainer}`}>
                 {props.groups.map(g => 
                     <button className={styles.groupItem}>
                         {g.name}
