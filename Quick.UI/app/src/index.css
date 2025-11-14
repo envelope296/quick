@@ -86,6 +86,6 @@ body {
   background-color: #c9cccf !important;
 }
 
-.input-select:disabled {
+.input-select-disabled {
   color: #c9cccf !important;
 }

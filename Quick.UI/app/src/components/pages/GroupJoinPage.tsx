@@ -98,7 +98,7 @@ export function GroupJoinPage() {
               isClearable
               loadOptions={loadGroups}
               classNames={{
-                control: () => "input-select"
+                control: (state) => state.isDisabled ? "input-select input-select-disabled" : "input-select"
               }}
               isDisabled={isGroupSelectDisabled}
               loadingMessage={() => "Поиск..."}
