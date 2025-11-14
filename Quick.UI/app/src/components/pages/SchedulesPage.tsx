@@ -6,6 +6,7 @@ import { useOutletContext } from "react-router-dom";
 import * as scheduleServise from "@/services/schedule"
 import type { ScheduleResponse } from "@/models/api/schedules";
 import { NoSchedules } from "../ui/schedules/NoSchedules";
+import { SchedulesView } from "../ui/schedules/SchedulesView";
 
 interface SchedulesPageContext {
     group: GroupResponse;
@@ -34,5 +35,5 @@ export function SchedulesPage() {
         return <NoSchedules group={group} />
     }
 
-    return <div>Расписания</div>
+    return <SchedulesView group={group} schedules={schedules} />
 }
