@@ -21,7 +21,7 @@ export function GroupsView(props: GroupsViewProps) {
                 <div className={styles.modalActions}>
                     <button 
                         className={`${styles.btn} ${styles.btnAction}`}
-                        onClick={async () => await navigate('create-group')}
+                        onClick={() => navigate('create-group')}
                     >
                         Добавить
                     </button>
@@ -31,6 +31,13 @@ export function GroupsView(props: GroupsViewProps) {
                         Присоединиться
                     </button>
                 </div>
+            </div>
+            <div className={styles.container}>
+                {props.groups.map(g => 
+                    <button className={styles.groupItem}>
+                        {g.name}
+                    </button>
+                )}
             </div>
         </section>
     );
