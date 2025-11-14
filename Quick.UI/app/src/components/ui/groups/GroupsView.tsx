@@ -34,7 +34,7 @@ export function GroupsView(props: GroupsViewProps) {
             </div>
             <div className={`${styles.container} ${styles.groupsContainer}`}>
                 {props.groups.map(g => 
-                    <button className={styles.groupItem}>
+                    <button className={styles.groupItem} onClick={() => navigate(`/groups/${g.id}`)}>
                         {g.name}
                     </button>
                 )}
