@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Quick.BusinessLogic.Contracts.Exceptions.Common;
 using Quick.BusinessLogic.Contracts.Requests.Groups;
@@ -90,12 +89,13 @@ namespace Quick.API.Controllers
         {
             var userContext = _userContextAccessor.GetCurrentOrFail();
 
+            var query = request.Query.Trim().ToLower();
             var groupsPage = await _groupRepository.Filter(g =>
                 g.IsPublic &&
                 g.OwnerId != userContext.UserId &&
                 g.Members.All(gm => gm.UserId != userContext.UserId) &&
                 g.University == request.University &&
-                g.Name.Contains(request.Query))
+                g.Name.ToLower().Contains(query))
             .OrderBy(g => g.CreatedOn)
             .Select(g => new GroupResponse
             {
