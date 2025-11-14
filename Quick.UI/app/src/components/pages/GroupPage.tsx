@@ -27,7 +27,7 @@ export function GroupPage() {
         return <></>
     }
 
-    <div>
+    return <div>
         <header>
             <h1>{group.name}</h1>
         </header>
