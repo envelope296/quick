@@ -9,6 +9,7 @@ import { GroupCreatePage } from "@/components/pages/GroupCreatePage";
 import { GroupPage } from "./components/pages/GroupPage";
 import { SchedulesPage } from "./components/pages/SchedulesPage";
 import { GroupJoinPage } from "./components/pages/GroupJoinPage";
+import { ScheduleCreatePage } from "./components/pages/ScheduleCreatePage";
 
 export function App() {
   const [error, {set: setError}] = useNullableState<ErrorViewProps>();
@@ -51,6 +52,8 @@ export function App() {
         <Route path="/join-group/*" element={<GroupJoinPage />} />
         <Route path="/groups/:id" element={<GroupPage />} >
           <Route index element={<SchedulesPage />} />
+          <Route path="/schedules/*" element={<SchedulesPage />} />
+          <Route path="/create-schedule/*" element={<ScheduleCreatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

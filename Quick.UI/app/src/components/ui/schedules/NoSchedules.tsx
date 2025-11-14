@@ -4,7 +4,7 @@ import ScheduleIcon from '@/assets/schedule.svg?react';
 import type { GroupResponse } from '@/models/api';
 
 interface NoSchedulesParams {
-    group: GroupResponse
+    group: GroupResponse;
 }
 
 export function NoSchedules({group}: NoSchedulesParams) {
@@ -24,7 +24,7 @@ export function NoSchedules({group}: NoSchedulesParams) {
                     </div>
                     <div className={styles["button-group"]}>
                         <button 
-                            // onClick={() => navigate('/create-schedule')} 
+                            onClick={() => navigate(`/groups/${group.id}/create-schedule`)} 
                             className="btn btn-primary"
                         >
                             Создать вручную

@@ -1,11 +1,16 @@
 import type { PageResponse } from "@/models/api";
-import type { ScheduleResponse } from "@/models/api/schedules";
+import type { CreateScheduleRequest, ScheduleResponse } from "@/models/api/schedules";
 import { buildAxiosInstanse } from "../builders";
 import type { AxiosInstance } from "axios";
 
 function api(): AxiosInstance {
     const api = buildAxiosInstanse('/v1/schedules', true);
     return api;
+}
+
+export async function create(request: CreateScheduleRequest): Promise<string> {
+    const response = await api().post<string>('/', request);
+    return response.data;
 }
 
 export async function getPage(groupId: string, page: number, size: number): Promise<PageResponse<ScheduleResponse>> {
