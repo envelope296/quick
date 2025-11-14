@@ -31,3 +31,8 @@ export interface CreateGroupRequest {
   university: string | null;
   subgroups: string[]
 }
+
+export interface SubgroupResponse {
+  id: string;
+  name: string;
+}

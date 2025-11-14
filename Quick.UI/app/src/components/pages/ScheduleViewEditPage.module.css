@@ -21,4 +21,16 @@
   padding: 25px 20px;
 }
 
+.modalHeader {
+  position: relative;
+  text-align: center;
+  margin-bottom: 32px;
+}
 
+.modalTitle {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.22;
+  color: #000000;
+  margin: 0;
+}
