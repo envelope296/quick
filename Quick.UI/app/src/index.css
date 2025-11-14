@@ -35,3 +35,54 @@ body {
   border: 1px solid #007aff;
   min-height: 49px;
 }
+
+.input-field {
+  color: #000;
+  display: flex;
+  align-items: center;
+  background-color: #ededed;
+  border-radius: 10px;
+  height: 40px;
+  padding: 10px 14px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.22;
+  border: none;
+  outline: none;
+}
+
+.input-select {
+  display: flex;
+  align-items: center;
+  color: #000;
+  background-color: #ededed;
+  border-radius: 10px;
+  min-height: 40px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.22;
+  border: none;
+  outline: none;
+  border-color: white;
+  box-shadow: none;
+}
+
+.input-select-label {
+  background-color: #ededed;
+}
+
+.input-select-remove {
+  background-color: #ededed;
+}
+
+.input-field:focus {
+  background-color: #c9cccf;
+}
+
+.input-select::placeholder {
+  color: red;
+}
+
+.input-select:focus-within {
+  background-color: #c9cccf;
+}

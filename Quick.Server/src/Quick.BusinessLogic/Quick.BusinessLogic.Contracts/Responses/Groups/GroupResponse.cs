@@ -10,6 +10,8 @@
 
         public required long? OwnerId { get; set; }
 
+        public required bool IsUserOwner { get; set; }
+
         public required bool IsPublic { get; set; }
     }
 }

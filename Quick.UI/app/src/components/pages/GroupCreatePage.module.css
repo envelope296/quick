@@ -48,57 +48,6 @@
   margin-bottom: 50px;
 }
 
-.inputField {
-  color: #000;
-  display: flex;
-  align-items: center;
-  background-color: #ededed;
-  border-radius: 10px;
-  height: 40px;
-  padding: 10px 14px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.22;
-  border: none;
-  outline: none;
-}
-
-.inputSelect {
-  display: flex;
-  align-items: center;
-  color: #000;
-  background-color: #ededed;
-  border-radius: 10px;
-  min-height: 40px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.22;
-  border: none;
-  outline: none;
-  border-color: white;
-  box-shadow: none;
-}
-
-.inputSelectLabel {
-  background-color: #ededed;
-}
-
-.inputSelectRemove {
-  background-color: #ededed;
-}
-
-.inputField:focus {
-  background-color: #c9cccf;
-}
-
-.inputSelect::placeholder {
-  color: red;
-}
-
-.inputSelect:focus-within {
-  background-color: #c9cccf;
-}
-
 .modalActions {
   display: flex;
   gap: 10px;

@@ -88,7 +88,7 @@ export function GroupCreatePage() {
           <div className={styles.formGroup}>
             <input
               type="text"
-              className={styles.inputField}
+              className="input-field"
               placeholder="Название"
               onChange={onGroupNameInputChanged}
             />
@@ -98,9 +98,7 @@ export function GroupCreatePage() {
               cacheOptions
               loadOptions={loadUniversities}
               classNames={{
-                control: () => styles.inputSelect,
-                multiValueLabel: () => styles.inputSelectLabel,
-                multiValueRemove: () => styles.inputSelectRemove,
+                control: () => "input-select"
               }}
               placeholder="Университет"
               onChange={(newValue, _) => onUniversityInputChanged(newValue?.value)}
@@ -119,9 +117,9 @@ export function GroupCreatePage() {
               formatCreateLabel={(value) => `Добавить ${value}`}
               onChange={(newValue) => setSubgroupNames(newValue.map(opt => opt.value))}
               classNames={{
-                control: () => styles.inputSelect,
-                multiValueLabel: () => styles.inputSelectLabel,
-                multiValueRemove: () => styles.inputSelectRemove,
+                control: () => "input-select",
+                multiValueLabel: () => "input-select-label",
+                multiValueRemove: () => "input-select-remove",
               }}
             ></CreatableSelect>
           </div>

@@ -35,6 +35,8 @@ namespace Quick.API.Controllers
         [HttpGet("{groupId:guid}")]
         public async Task<ActionResult<GroupResponse>> GetAsync([FromRoute] Guid groupId, CancellationToken cancellationToken)
         {
+            var userContext = _userContextAccessor.GetCurrentOrFail();
+
             // TODO: Validation
 
             var group = await _groupRepository
@@ -44,6 +46,7 @@ namespace Quick.API.Controllers
                     Id = g.Id,
                     Name = g.Name,
                     OwnerId = g.OwnerId,
+                    IsUserOwner = g.OwnerId == userContext.UserId,
                     IsPublic = g.IsPublic,
                 })
                 .FirstOrDefaultAsync(cancellationToken) ?? throw new EntityNotFoundException("Группа не найдена");
@@ -72,10 +75,37 @@ namespace Quick.API.Controllers
                 Id = g.Id,
                 Name = g.Name,
                 OwnerId = g.OwnerId,
+                IsUserOwner = g.OwnerId == userContext.UserId,
                 IsPublic = g.IsPublic,
             })
             .ToPageResponseAsync(page, size, cancellationToken);
             
+            return Ok(groupsPage);
+        }
+
+        [HttpPost("search")]
+        public async Task<ActionResult<PageResponse<GroupResponse>>> SearchAsync(
+            [FromBody] SearchGroupsRequest request, 
+            CancellationToken cancellationToken)
+        {
+            var userContext = _userContextAccessor.GetCurrentOrFail();
+
+            var groupsPage = await _groupRepository.Filter(g =>
+                g.IsPublic &&
+                g.OwnerId != userContext.UserId &&
+                g.Members.All(gm => gm.UserId != userContext.UserId) &&
+                g.University == request.University &&
+                g.Name.Contains(request.Query))
+            .OrderBy(g => g.CreatedOn)
+            .Select(g => new GroupResponse
+            {
+                Id = g.Id,
+                Name = g.Name,
+                OwnerId = g.OwnerId,
+                IsUserOwner = g.OwnerId == userContext.UserId,
+                IsPublic = g.IsPublic,
+            }).ToPageResponseAsync(request, cancellationToken);
+
             return Ok(groupsPage);
         }
 
