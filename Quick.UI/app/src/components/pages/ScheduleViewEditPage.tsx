@@ -11,6 +11,7 @@ import { Switcher } from "../common/Switcher";
 import { createEntityOption, type EntityOption } from "@/types/common";
 import Select from "react-select";
 import { useAppRouting } from "@/hooks/use-app-routing";
+import { LessonsView } from "../ui/schedules/LessonsView";
 
 interface ScheduleViewEditPageContext {
     group: GroupResponse;
@@ -112,6 +113,7 @@ export function ScheduleViewEditPage() {
                         }}
                     />
                 }
+                {isEdit ? <p>edit</p> : <LessonsView />}
             </div>
         </div>
     </section>
