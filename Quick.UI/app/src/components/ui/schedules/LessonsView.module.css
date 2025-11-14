@@ -18,6 +18,11 @@
   width: 100%;
 }
 
+.header > button {
+  border: none;
+  background-color: transparent;
+}
+
 .headerLabel {
   display: flex;
   flex-direction: column;
