@@ -5,6 +5,7 @@ import type { GroupResponse } from '@/models/api';
 import { useAppRouting } from '@/hooks/use-app-routing';
 import { NoGroups } from '../ui/groups/NoGroups';
 import { GroupsView } from '../ui/groups/GroupsView';
+import { BeatLoader } from 'react-spinners';
 
 export function HomePage() {
     useAppRouting();

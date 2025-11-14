@@ -10,6 +10,7 @@ import { GroupPage } from "./components/pages/GroupPage";
 import { SchedulesPage } from "./components/pages/SchedulesPage";
 import { GroupJoinPage } from "./components/pages/GroupJoinPage";
 import { ScheduleCreatePage } from "./components/pages/ScheduleCreatePage";
+import { BeatLoader } from "react-spinners";
 
 export function App() {
   const [error, {set: setError}] = useNullableState<ErrorViewProps>();
