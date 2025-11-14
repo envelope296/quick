@@ -6,6 +6,7 @@ import * as groupServise from "@/services/group";
 import { useNavigate } from "react-router-dom";
 import * as dadataService from "@/services/dadata";
 import AsyncSelect from "react-select/async";
+import AsyncCreatableSelect from "react-select/async-creatable";
 
 export function GroupJoinPage() {
   const navigate = useNavigate();
@@ -20,12 +21,13 @@ export function GroupJoinPage() {
   function onUniversityChanged(newValue: string | null | undefined) {
     if (newValue === undefined || newValue === null || newValue === "") {
       clearUniversity();
-      setGroupSelectDisabled();
     }
     else {
       setUniversity(newValue);
-      unsetGroupSelectDisabled();
     }
+    
+    clearGroup();
+    setGroupSelectDisabled();
   }
 
   function onGroupChanged(newValue: EntityOption | null | undefined) {
@@ -76,7 +78,8 @@ export function GroupJoinPage() {
         </header>
         <main className={styles.modalBody}>
           <div className={styles.formGroup}>
-            <AsyncSelect
+            <AsyncCreatableSelect
+              createOptionPosition="first"
               isClearable
               cacheOptions
               loadOptions={loadUniversities}
@@ -99,7 +102,8 @@ export function GroupJoinPage() {
               loadingMessage={() => "Поиск..."}
               placeholder="Группа"
               onChange={(newValue, _) => onGroupChanged(newValue)}
-              noOptionsMessage={() => "Введите название группы"}
+              noOptionsMessage={() => "Группы не найдены"}
+              value={group}
             />
           </div>
 

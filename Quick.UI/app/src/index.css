@@ -85,3 +85,7 @@ body {
 .input-select:focus-within {
   background-color: #c9cccf !important;
 }
+
+.input-select:disabled {
+  color: #c9cccf !important;
+}
