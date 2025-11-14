@@ -1,4 +1,4 @@
-import type { GroupResponse, SubgroupResponse } from "@/models/api";
+import type { GroupResponse } from "@/models/api";
 import { useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import styles from "./ScheduleViewEditPage.module.css";
 import * as scheduleServise from "@/services/schedule"
@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { Switcher } from "../common/Switcher";
 import { createEntityOption, type EntityOption } from "@/types/common";
 import Select from "react-select";
-import type { InputActionMeta } from "react-select";
 
 interface ScheduleViewEditPageContext {
     group: GroupResponse;
