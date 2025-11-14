@@ -15,29 +15,30 @@ export function GroupJoinPage() {
   const [university, {set: setUniversity, clear: clearUniversity}] = useNullableState<string>();
   const [group, {set: setGroup, clear: clearGroup}] = useNullableState<EntityOption>();
   
-  const [isGroupSelectDisabled, { setTrue: setGroupSelectDisabled, setFalse: unsetGroupSelectDisabled }] = useBoolean(true);
-  const [isJoinDisabled, { setTrue: setJoinDisabled, setFalse: unsetJoinDisabled }] = useBoolean(true);
+  const [isGroupSelectDisabled, { setTrue: disableGroupSelect, setFalse: enableGroupSelect }] = useBoolean(true);
+  const [isJoinButtonDisabled, { setTrue: disableJoinButton, setFalse: enableJoinButton }] = useBoolean(true);
 
   function onUniversityChanged(newValue: string | null | undefined) {
+    clearGroup();
+    
     if (newValue === undefined || newValue === null || newValue === "") {
       clearUniversity();
+      disableGroupSelect();
     }
     else {
       setUniversity(newValue);
+      enableGroupSelect();
     }
-    
-    clearGroup();
-    setGroupSelectDisabled();
   }
 
   function onGroupChanged(newValue: EntityOption | null | undefined) {
     if (newValue === undefined || newValue === null) {
       clearGroup();
-      setJoinDisabled();
+      disableJoinButton();
     }
     else {
       setGroup(newValue);
-      unsetJoinDisabled
+      enableJoinButton();
     }
   }
 
@@ -86,6 +87,7 @@ export function GroupJoinPage() {
               classNames={{
                 control: () => "input-select"
               }}
+              formatCreateLabel={(value) => value}
               loadingMessage={() => "Поиск..."}
               placeholder="Университет"
               onChange={(newValue, _) => onUniversityChanged(newValue?.value)}
@@ -115,7 +117,7 @@ export function GroupJoinPage() {
               Отмена
             </button>
             <button
-              disabled={isJoinDisabled}
+              disabled={isJoinButtonDisabled}
               className={`${styles.btn} ${styles.btnJoin}`}
               onClick={onJoinPressed}
             >
