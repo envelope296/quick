@@ -1,5 +1,4 @@
 import styles from "./LessonsView.module.css";
-import "./index.css";
 import ArrorLeftIcon from "@/assets/arrow-left.svg?react";
 import ArrorRightIcon from "@/assets/arrow-right.svg?react";
 
