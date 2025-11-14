@@ -3,6 +3,7 @@ import { Outlet, useParams } from "react-router-dom";
 import * as groupService from "@/services/group"
 import { useNullableState } from "@/hooks";
 import type { GroupResponse } from "@/models/api";
+import styles from "./GroupPage.module.css";
 
 export function GroupPage() {
     const [group, { set: setGroup }] = useNullableState<GroupResponse>();
@@ -28,7 +29,7 @@ export function GroupPage() {
     }
 
     return <div>
-        <header>
+        <header className={styles.header}>
             <h1>{group.name}</h1>
         </header>
         <Outlet />

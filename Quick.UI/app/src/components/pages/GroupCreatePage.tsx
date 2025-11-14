@@ -49,6 +49,7 @@ export function GroupCreatePage() {
   }
 
   function onUniversityInputChanged(newValue: string | null | undefined) {
+    
     if (newValue ===undefined || newValue === null || newValue === "") {
       clearUniversity();
     }
