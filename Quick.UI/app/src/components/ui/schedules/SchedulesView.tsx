@@ -1,7 +1,7 @@
 
 import type { GroupResponse } from '@/models/api';
 import ScheduleIcon from '@/assets/schedule.svg?react';
-import styles from './GroupsView.module.css';
+import styles from './SchedulesView.module.css';
 import { useNavigate } from 'react-router-dom';
 import type { ScheduleResponse } from '@/models/api/schedules';
 
