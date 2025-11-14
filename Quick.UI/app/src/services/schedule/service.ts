@@ -24,3 +24,8 @@ export async function getPage(groupId: string, page: number, size: number): Prom
         });
     return response.data;
 }
+
+export async function get(scheduleId: string): Promise<ScheduleResponse> {
+    const response = await api().get<ScheduleResponse>(`/${scheduleId}`);
+    return response.data;
+}

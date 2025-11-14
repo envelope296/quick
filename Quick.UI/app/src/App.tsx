@@ -11,6 +11,7 @@ import { SchedulesPage } from "./components/pages/SchedulesPage";
 import { GroupJoinPage } from "./components/pages/GroupJoinPage";
 import { ScheduleCreatePage } from "./components/pages/ScheduleCreatePage";
 import { Loading } from "./components/common/Loading";
+import { ScheduleViewEditPage } from "./components/pages/ScheduleViewEditPage";
 
 export function App() {
   const [error, {set: setError}] = useNullableState<ErrorViewProps>();
@@ -55,6 +56,7 @@ export function App() {
           <Route index element={<SchedulesPage />} />
           <Route path="schedules/*" element={<SchedulesPage />} />
           <Route path="create-schedule/*" element={<ScheduleCreatePage />} />
+          <Route path="schedules/view/:scheduleId" element={<ScheduleViewEditPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

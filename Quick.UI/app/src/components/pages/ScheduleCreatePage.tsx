@@ -1,5 +1,5 @@
 import type { GroupResponse } from "@/models/api";
-import { useOutletContext } from "react-router-dom";
+import { createSearchParams, useNavigate, useOutletContext } from "react-router-dom";
 import styles from "./ScheduleCreatePage.module.css";
 import * as scheduleService from "@/services/schedule";
 import { useBoolean, useNullableState } from "@/hooks";
@@ -14,7 +14,8 @@ interface ScheduleCreatePagePageContext {
 }
 
 export function ScheduleCreatePage() {
-    const toPrevios = useAppRouting(() => `/groups/${group.id}/schedules`)
+    const toPrevios = useAppRouting(() => `/groups/${group.id}/schedules`);
+    const navigate = useNavigate();
 
     const { group } = useOutletContext<ScheduleCreatePagePageContext>();
 
@@ -36,10 +37,6 @@ export function ScheduleCreatePage() {
         }
     }
 
-    function onIsBiweeklyInputChanged(e: React.ChangeEvent<HTMLInputElement>) {
-        setIsBiweekly(e.target.checked);
-    }
-
     async function onCreatePressed() {
         if(isNullOrEmpty(scheduleName)) {
             return;
@@ -52,6 +49,9 @@ export function ScheduleCreatePage() {
             lessonTypes: []
         }
         const scheduleId = await scheduleService.create(request);
+
+        const params = createSearchParams({ edit: "true" });
+        await navigate(`/groups/${group.id}/schedules/view/${scheduleId}?${params}`);
     }
 
     return (

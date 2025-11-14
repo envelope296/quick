@@ -15,7 +15,7 @@ export function GroupPage() {
     useEffect(() => {
         async function initialize() {
             if (groupId === undefined) {
-                throw new Error("Не передан id группы");
+                throw new Error("Не передан ID группы");
             }
 
             const group = await groupService.get(groupId);
