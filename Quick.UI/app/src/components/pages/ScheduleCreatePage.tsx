@@ -6,8 +6,9 @@ import { useBoolean, useNullableState } from "@/hooks";
 import { isNullOrEmpty } from "@/services/helpers/common";
 import { ScheduleType } from "@/models/api/schedules";
 import { useAppRouting } from "@/hooks/use-app-routing";
-import { Switch } from "@maxhub/max-ui";
+// import { Switch } from "@maxhub/max-ui";
 import { useState } from "react";
+import { Switch } from "@maxhub/max-ui";
 
 interface ScheduleCreatePagePageContext {
     group: GroupResponse;
