@@ -1,0 +1,49 @@
+
+import type { GroupResponse } from '@/models/api';
+import ScheduleIcon from '@/assets/schedule.svg?react';
+import styles from './GroupsView.module.css';
+import { useNavigate } from 'react-router-dom';
+import type { ScheduleResponse } from '@/models/api/schedules';
+
+interface SchedulesViewProps {
+    group: GroupResponse;
+    schedules: ScheduleResponse[];
+}
+
+export function SchedulesView({group, schedules}: SchedulesViewProps) {
+    const navigate = useNavigate();
+
+    return (
+        <section className={styles["schedules-screen"]}>
+            <div className={styles.container}>
+                <ScheduleIcon className={styles["icon"]} />
+                <div className={styles["text-content"]}>
+                    <h1 className={styles.title}>Расписания группы</h1>
+                </div>
+                {group.isUserOwner &&
+                    <div className={styles.modalActions}>
+                        <button 
+                            className={`${styles.btn} ${styles.btnAction}`}
+                            onClick={() => navigate(`/groups/${group.id}/create-schedule`)}
+                        >
+                            Создать
+                        </button>
+                        <button
+                            className={`${styles.btn} ${styles.btnAction}`}
+                            // onClick={() => navigate('/join-group')}
+                        >
+                            Считать из файла
+                        </button>
+                    </div>
+                }
+            </div>
+            <div className={`${styles.container} ${styles.groupsContainer}`}>
+                {schedules.map(g => 
+                    <button className={styles.groupItem} onClick={() => navigate(`/groups/${g.id}`)}>
+                        {g.name}
+                    </button>
+                )}
+            </div>
+        </section>
+    );
+}
