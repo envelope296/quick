@@ -7,7 +7,7 @@ import * as scheduleServise from "@/services/schedule"
 import type { ScheduleResponse } from "@/models/api/schedules";
 import { NoSchedules } from "../ui/schedules/NoSchedules";
 import { SchedulesView } from "../ui/schedules/SchedulesView";
-import { BeatLoader } from "react-spinners";
+import { Loading } from "../common/Loading";
 
 interface SchedulesPageContext {
     group: GroupResponse;
@@ -29,7 +29,7 @@ export function SchedulesPage() {
     }, []);
 
     if (schedules == null) {
-        return <BeatLoader size={10} margin={3} color="#757575" speedMultiplier={0.8} />
+        return <Loading />
     }
 
     if (schedules.length == 0) {

@@ -5,7 +5,7 @@ import type { GroupResponse } from '@/models/api';
 import { useAppRouting } from '@/hooks/use-app-routing';
 import { NoGroups } from '../ui/groups/NoGroups';
 import { GroupsView } from '../ui/groups/GroupsView';
-import { BeatLoader } from 'react-spinners';
+import { Loading } from '../common/Loading';
 
 export function HomePage() {
     useAppRouting();
@@ -22,7 +22,7 @@ export function HomePage() {
     }, [])
 
     if (groups == null) {
-        return <BeatLoader size={10} margin={3} color="#757575" speedMultiplier={0.8} />
+        return <Loading />
     }
 
     if (groups.length == 0) {

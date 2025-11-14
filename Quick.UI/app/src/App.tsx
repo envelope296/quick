@@ -10,7 +10,7 @@ import { GroupPage } from "./components/pages/GroupPage";
 import { SchedulesPage } from "./components/pages/SchedulesPage";
 import { GroupJoinPage } from "./components/pages/GroupJoinPage";
 import { ScheduleCreatePage } from "./components/pages/ScheduleCreatePage";
-import { BeatLoader } from "react-spinners";
+import { Loading } from "./components/common/Loading";
 
 export function App() {
   const [error, {set: setError}] = useNullableState<ErrorViewProps>();
@@ -42,7 +42,7 @@ export function App() {
   }
 
   if (isLoading) {
-    return <BeatLoader size={10} margin={3} color="#757575" speedMultiplier={0.8} />
+    return <Loading />
   }
   
   return (

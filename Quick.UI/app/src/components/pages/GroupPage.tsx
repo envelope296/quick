@@ -4,7 +4,7 @@ import * as groupService from "@/services/group"
 import { useNullableState } from "@/hooks";
 import type { GroupResponse } from "@/models/api";
 import styles from "./GroupPage.module.css";
-import { BeatLoader } from "react-spinners";
+import { Loading } from "../common/Loading";
 
 export function GroupPage() {
     const [group, { set: setGroup }] = useNullableState<GroupResponse>();
@@ -26,7 +26,7 @@ export function GroupPage() {
     }, []);
 
     if (group === null) {
-        return <BeatLoader size={10} margin={3} color="#757575" speedMultiplier={0.8} />
+        return <Loading />
     }
 
     return <div>
