@@ -70,7 +70,7 @@ export function ScheduleCreatePage() {
                             onChange={onScheduleNameInputChanged}
                         />
                         <div className={styles.switcherBox}>
-                            <p className={styles.switcherLabel}>Раздление на четные/нечетные недели</p>
+                            <p className={styles.switcherLabel}>Раздление на чётные/нёчетные недели</p>
                             <Switcher
                                 defaultState={true}
                                 trueMessage="Есть"

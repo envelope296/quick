@@ -85,9 +85,11 @@
 .switcherBox {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 .switcherLabel {
-  font-size: 14pt;
+  font-size: 11pt;
+  color: #757575;
+  padding: 0 5px;
 }
