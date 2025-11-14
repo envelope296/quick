@@ -88,4 +88,5 @@ body {
 
 .input-select-disabled {
   color: #c9cccf !important;
+  cursor: default;
 }
