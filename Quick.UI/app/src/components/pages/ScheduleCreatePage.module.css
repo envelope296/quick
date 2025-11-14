@@ -81,3 +81,13 @@
 .btnCreate:disabled {
   background-color: #c9cccf;
 }
+
+.switcherBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.switcherLabel {
+  font-size: 14pt;
+}

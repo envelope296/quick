@@ -69,13 +69,15 @@ export function ScheduleCreatePage() {
                             placeholder="Название"
                             onChange={onScheduleNameInputChanged}
                         />
-                        <p>Раздление на четные/нечетные недели</p>
-                        <Switcher
-                            defaultState={true}
-                            trueMessage="Есть"
-                            falseMessage="Нет"
-                            onChange={setIsBiweekly}
-                        />
+                        <div className={styles.switcherBox}>
+                            <p className={styles.switcherLabel}>Раздление на четные/нечетные недели</p>
+                            <Switcher
+                                defaultState={true}
+                                trueMessage="Есть"
+                                falseMessage="Нет"
+                                onChange={setIsBiweekly}
+                            />
+                        </div>
                     </div>
 
                     <div className={styles.modalActions}>
