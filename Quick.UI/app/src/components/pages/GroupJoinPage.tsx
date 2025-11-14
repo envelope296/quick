@@ -72,7 +72,7 @@ export function GroupJoinPage() {
   }
 
   return (
-    <section className={styles.createGroupModal}>
+    <section className={styles.joinGroupModal}>
       <div className={styles.modalCard}>
         <header className={styles.modalHeader}>
           <h1 className={styles.modalTitle}>Поиск группы</h1>
