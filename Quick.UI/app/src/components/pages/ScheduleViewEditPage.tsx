@@ -59,6 +59,7 @@ export function ScheduleViewEditPage() {
             </header>
             <div className={styles.selectContainer}>
                 <Select
+                    isSearchable
                     isClearable
                     options={subgroupsOptions}
                     classNames={{
@@ -73,7 +74,6 @@ export function ScheduleViewEditPage() {
                             setSelectedSubgroup(newValue);
                         }
                     }}
-                    value={selectedSubgroup}
                 />
                 </div>
         </div>
