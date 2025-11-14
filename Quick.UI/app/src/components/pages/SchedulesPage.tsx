@@ -31,7 +31,7 @@ export function SchedulesPage() {
     }
 
     if (schedules.length == 0) {
-        return <NoSchedules />
+        return <NoSchedules group={group} />
     }
 
     return <div>Расписания</div>
