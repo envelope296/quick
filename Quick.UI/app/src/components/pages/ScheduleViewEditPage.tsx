@@ -54,22 +54,24 @@ export function ScheduleViewEditPage() {
             <header className={styles.modalHeader}>
                 <h1 className={styles.modalTitle}>{schedule.name}</h1>
             </header>
-            <Select
-                isClearable
-                options={subgroupsOptions}
-                classNames={{
-                    control: () => "input-select"
-                }}
-                placeholder="Подгруппа"
-                onChange={(newValue, _) => {
-                    if (newValue == null) {
-                        clearSelectedSubgroup();
-                    }
-                    else {
-                        setSelectedSubgroup(newValue);
-                    }
-                }}
-            />
+            <div className={styles.selectContainer}>
+                <Select
+                    isClearable
+                    options={subgroupsOptions}
+                    classNames={{
+                        control: () => "input-select"
+                    }}
+                    placeholder="Подгруппа"
+                    onChange={(newValue, _) => {
+                        if (newValue == null) {
+                            clearSelectedSubgroup();
+                        }
+                        else {
+                            setSelectedSubgroup(newValue);
+                        }
+                    }}
+                />
+                </div>
         </div>
         {group.isUserOwner &&
             <Switcher 

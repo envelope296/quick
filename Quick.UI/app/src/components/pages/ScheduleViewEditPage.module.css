@@ -33,3 +33,9 @@
   color: #000000;
   margin: 0;
 }
+
+.selectContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
