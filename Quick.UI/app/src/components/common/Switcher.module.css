@@ -6,6 +6,7 @@
   background-color: #ededed;
   border-radius: 10px;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .switcherBtn {
