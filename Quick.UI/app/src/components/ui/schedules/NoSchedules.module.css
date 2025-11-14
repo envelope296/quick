@@ -1,7 +1,8 @@
 .no-schedules-screen {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  margin-top: 20px;
   min-height: 100vh;
   padding: 20px;
 }
