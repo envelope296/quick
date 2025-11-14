@@ -2,6 +2,7 @@ import type { GroupResponse } from "@/models/api";
 import { createSearchParams, useNavigate, useOutletContext } from "react-router-dom";
 import styles from "./ScheduleCreatePage.module.css";
 import * as scheduleService from "@/services/schedule";
+import * as webAppContext from "@/services/app-context";
 import { useBoolean, useNullableState } from "@/hooks";
 import { isNullOrEmpty } from "@/services/helpers/common";
 import { ScheduleType } from "@/models/api/schedules";
@@ -74,7 +75,11 @@ export function ScheduleCreatePage() {
                                 defaultState={true}
                                 trueMessage="Есть"
                                 falseMessage="Нет"
-                                onChange={setIsBiweekly}
+                                onChange={(value) => {
+                                    const webApp = webAppContext.getWebApp();
+                                    webApp.HapticFeedback.selectionChanged(false);
+                                    setIsBiweekly(value);
+                                }}
                             />
                         </div>
                     </div>
