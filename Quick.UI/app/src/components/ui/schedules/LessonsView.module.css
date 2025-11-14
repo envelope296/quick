@@ -1,0 +1,114 @@
+.container {
+  background-color: #ffffff;
+  border-radius: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 10px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.headerLabel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 60px;
+}
+
+.headerLabel > h1 {
+  font-weight: 500;
+  font-size: 22px;
+  color: #000000;
+}
+
+.headerLabel > p {
+  font-size: 16px;
+  line-height: 1.22;
+  color: #757575;
+}
+
+.lessonsContainer {
+  background-color: #ebebeb;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2px;
+  border-top: 2px solid #ebebeb;
+}
+
+.lessonsContainer > div {
+  background-color: white;
+}
+
+.time {
+  padding: 10px;
+}
+
+.time > h1 {
+  background-color: #007aff;
+  color: white;
+  border-radius: 6px;
+  font-size: 16pt;
+  font-weight: 500;
+  height: 29px;
+}
+
+.time > p {
+  margin-top: 5px;
+  font-size: 12pt;
+  color: black;
+}
+
+.lesson {
+  display: flex;
+  /* flex-direction: row; */
+  padding: 10px;
+}
+
+.lessonInfo {
+  flex: 1;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.lessonInfo > h1 {
+  font-size: 16pt;
+  font-weight: 500;
+}
+
+.lessonInfo > p {
+  font-size: 14pt;
+  font-weight: 200;
+  color: #757575;
+}
+
+.cabinet {
+  font-size: 12pt !important;
+  border: 1px solid #007aff;
+  border-radius: 4px;
+  color: #007aff !important;
+  padding: 1px 5px;
+  align-self: flex-start;
+}
+
+.lessonType {
+}
+
+.lessonType > p {
+  border-radius: 4px;
+  color: #59d51f;
+  padding: 1px 5px;
+  border: 1px solid rgba(89, 213, 31, 0.3);
+}
