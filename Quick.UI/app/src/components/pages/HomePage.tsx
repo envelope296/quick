@@ -21,7 +21,7 @@ export function HomePage() {
     }, [])
 
     if (groups == null) {
-        return <></>
+        return <BeatLoader size={10} margin={3} color="#757575" speedMultiplier={0.8} />
     }
 
     if (groups.length == 0) {

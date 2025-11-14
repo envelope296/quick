@@ -41,7 +41,7 @@ export function App() {
   }
 
   if (isLoading) {
-    return <></>;
+    return <BeatLoader size={10} margin={3} color="#757575" speedMultiplier={0.8} />
   }
   
   return (
