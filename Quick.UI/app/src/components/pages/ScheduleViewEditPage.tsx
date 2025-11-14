@@ -113,8 +113,8 @@ export function ScheduleViewEditPage() {
                         }}
                     />
                 }
-                {isEdit ? <p>edit</p> : <LessonsView />}
             </div>
+            {isEdit ? <p>edit</p> : <LessonsView />}
         </div>
     </section>
 }
