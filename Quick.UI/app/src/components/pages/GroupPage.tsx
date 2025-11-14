@@ -32,6 +32,6 @@ export function GroupPage() {
         <header className={styles.header}>
             <h1>{group.name}</h1>
         </header>
-        <Outlet />
+        <Outlet context={{group}} />
     </div>
 }
