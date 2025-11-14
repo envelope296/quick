@@ -14,10 +14,6 @@ export function GroupCreatePage() {
   const navigate = useNavigate();
   const toPrevios = useAppRouting(() => '/');
 
-  const components = {
-    DropdownIndicator: null,
-  };
-
   const [groupName, {set: setGroupName, clear: clearGroupName}] = useNullableState<string>();
   const [subgroupNames, setSubgroupNames] = useState<string[]>([]);
   const [university, {set: setUniversity, clear: clearUniversity}] = useNullableState<string>();
@@ -101,6 +97,7 @@ export function GroupCreatePage() {
               classNames={{
                 control: () => "input-select"
               }}
+              loadingMessage={() => "Поиск..."}
               placeholder="Университет"
               onChange={(newValue, _) => onUniversityInputChanged(newValue?.value)}
               formatCreateLabel={(value) => value}

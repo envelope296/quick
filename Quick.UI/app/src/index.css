@@ -67,11 +67,11 @@ body {
 }
 
 .input-select-label {
-  background-color: #ededed !important;;
+  background-color: #ededed !important;
 }
 
 .input-select-remove {
-  background-color: #ededed !important;;
+  background-color: #ededed !important;
 }
 
 .input-field:focus {
@@ -83,5 +83,5 @@ body {
 }
 
 .input-select:focus-within {
-  background-color: #c9cccf;
+  background-color: #c9cccf !important;
 }
