@@ -1,0 +1,22 @@
+.switcher {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    padding: 2px;
+    background-color: #ededed;
+}
+
+.switcherBtn {
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 16px;
+    background-color: white;
+    color: black;
+}
+
+.switcherBtn:disabled {
+    cursor: none;
+    background-color: transparent;
+    background-color: transparent;
+}

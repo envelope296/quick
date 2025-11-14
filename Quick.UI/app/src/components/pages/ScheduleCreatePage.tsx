@@ -8,7 +8,7 @@ import { ScheduleType } from "@/models/api/schedules";
 import { useAppRouting } from "@/hooks/use-app-routing";
 // import { Switch } from "@maxhub/max-ui";
 import { useState } from "react";
-import { Switch } from "@maxhub/max-ui";
+import { Switcher } from "../common/Switcher";
 
 interface ScheduleCreatePagePageContext {
     group: GroupResponse;
@@ -69,7 +69,12 @@ export function ScheduleCreatePage() {
                             placeholder="Название"
                             onChange={onScheduleNameInputChanged}
                         />
-                        <Switch onChange={onIsBiweeklyInputChanged} />
+                        <Switcher
+                            defaultState={true}
+                            trueMessage="Есть"
+                            falseMessage="Нет"
+                            onChange={setIsBiweekly}
+                        />
                     </div>
 
                     <div className={styles.modalActions}>
