@@ -21,6 +21,7 @@
 .header > button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .headerLabel {
@@ -76,7 +77,6 @@
 
 .lesson {
   display: flex;
-  /* flex-direction: row; */
   padding: 10px;
 }
 
