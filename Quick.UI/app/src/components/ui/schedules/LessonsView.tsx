@@ -16,7 +16,7 @@ function getTimeRange(timeSlot: TimeSlotResponse) {
     return "";
   }
 
-  return `${timeSlot.from} - ${timeSlot.to}`;
+  return `${timeSlot.from.slice(0, 5)} - ${timeSlot.to.slice(0, 5)}`;
 }
 
 export function LessonsView({date, timeSlots, onDateChanged}: LessonsViewProps) {
@@ -56,7 +56,9 @@ export function LessonsView({date, timeSlots, onDateChanged}: LessonsViewProps) 
             <h1>{`${i + 1} пара`}</h1>
             <p>{getTimeRange(ts)}</p>
           </div>
-          {ts.lessons.map((l) => <Lesson lesson={l} />)}
+          <div>
+            {ts.lessons.map((l) => <Lesson lesson={l} />)}
+          </div>
         </>
         )}
       </div>

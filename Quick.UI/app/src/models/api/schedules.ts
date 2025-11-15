@@ -29,18 +29,18 @@ export interface CreateScheduleRequest {
 
 export interface TimeSlotResponse {
     id: string; 
-    from?: string | null; 
-    to?: string | null;       
+    from: string | null; 
+    to: string | null;       
     lessons: LessonResponse[];
 }
 
 export interface LessonResponse {
     id: string;
-    subject?: SubjectResponse | null;
-    teacher?: TeacherResponse | null;
-    lessonType?: LessonTypeResponse | null;
-    cabinetNumber?: string | null;
-    address?: string | null;
+    subject: SubjectResponse | null;
+    teacher: TeacherResponse | null;
+    lessonType: LessonTypeResponse | null;
+    cabinetNumber: string | null;
+    address: string | null;
 }
 
 export interface LessonTypeResponse {
@@ -56,9 +56,9 @@ export interface SubjectResponse {
 export interface TeacherResponse {
     id: string;
     fullName: string;
-    email?: string | null;
-    phoneNumber?: string | null;
-    messagerUserId?: number | null;
+    email: string | null;
+    phoneNumber: string | null;
+    messagerUserId: number | null;
 }
 
 export enum DayOfWeek {
@@ -73,14 +73,14 @@ export enum DayOfWeek {
 
 export interface AddLessonRequest {
     dayOfWeek: DayOfWeek;
-    weekType?: WeekType | null;
-    subgroupId?: string | null;
+    weekType: WeekType | null;
+    subgroupId: string | null;
     subjectId: string;
     timeSlotId: string;
-    teacherId?: string | null;
-    lessonType?: string | null;
-    cabinetNumber?: string | null;
-    address?: string | null;
+    teacherId: string | null;
+    lessonType: string | null;
+    cabinetNumber: string | null;
+    address: string | null;
 }
 
 export interface AddTimeSlotRequest {
@@ -94,7 +94,7 @@ interface GetTimeSlotsPageRequestBase {
     page: number;
     size: number;
     scheduleId: string;
-    subgroupId?: string | null;
+    subgroupId: string | null;
 }
 
 export interface GetTimeSlotsPageForDateRequest extends GetTimeSlotsPageRequestBase {
@@ -103,5 +103,5 @@ export interface GetTimeSlotsPageForDateRequest extends GetTimeSlotsPageRequestB
 
 export interface GetTimeSlotsPageForDayOfWeekRequest extends GetTimeSlotsPageRequestBase {
     dayOfWeek: DayOfWeek;
-    weekType?: WeekType | null;
+    weekType: WeekType | null;
 }
