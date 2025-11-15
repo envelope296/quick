@@ -29,6 +29,7 @@
   flex-direction: column;
   justify-content: center;
   height: 60px;
+  width: 280px;
 }
 
 .headerLabel > h1 {
