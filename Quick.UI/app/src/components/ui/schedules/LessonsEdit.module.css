@@ -51,6 +51,7 @@
   grid-template-columns: 100px 1fr;
   gap: 2px;
   border-top: 2px solid #ebebeb;
+  border-bottom: 2px solid #ebebeb;
 }
 
 .lessonsContainer > div {
@@ -94,6 +95,7 @@
 }
 
 .tsButton {
+  margin-top: 20px;
     display: flex;
   justify-content: center;
   align-items: center;
