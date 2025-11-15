@@ -13,9 +13,13 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@maxhub/max-ui": "^0.1.12",
+    "@mui/material": "^7.3.5",
     "@mui/x-date-pickers": "^8.18.0",
     "axios": "^1.13.2",
+    "dayjs": "^1.11.19",
     "gh-pages": "^6.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

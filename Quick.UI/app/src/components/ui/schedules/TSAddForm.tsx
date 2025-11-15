@@ -18,10 +18,12 @@ export function TSAddForm({onCreate, onCancel}: TSAddFormoPS) {
             <TimeField
                 label="Начало"
                 format="HH:mm"
+                onChange={}
             />
             <TimeField
                 label="Конец"
                 format="HH:mm"
+                onChange={}
             />
           </div>
 
