@@ -59,6 +59,7 @@ export function LessonAddForm({
         <main className={styles.modalBody}>
           <div className={styles.formGroup}>
             <AsyncCreatableSelect
+              isClearable
               placeholder="Предмет"
               onChange={(option) => {
                 if (!option) {
@@ -81,6 +82,7 @@ export function LessonAddForm({
             />
 
             <AsyncCreatableSelect
+              isClearable
               placeholder="Преподаватель"
               onChange={(option) => {
                 if (!option) {
@@ -103,6 +105,7 @@ export function LessonAddForm({
             />
 
             <AsyncSelect
+              isClearable
               isSearchable={false}
               placeholder="Тип занятия"
               onChange={(option) => {
@@ -145,7 +148,7 @@ export function LessonAddForm({
               Отмена
             </button>
             <button
-              disabled={subjectId !== null || !isNullOrEmpty(newSubjectName) }
+              disabled={subjectId === null && isNullOrEmpty(newSubjectName) }
               className={`${styles.btn} ${styles.btnCreate}`}
               onClick={() => onCreate(
                 subjectId,
