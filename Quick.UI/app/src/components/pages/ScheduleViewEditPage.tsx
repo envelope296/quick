@@ -52,10 +52,10 @@ export function ScheduleViewEditPage() {
     
     async function fetchTimeSlots() {
         if (isEdit) {
-            await fetchTimeSlotsForDate(selectedDate);
+            await fetchTimeSlotsForDayOfWeek(selectedDayOfWeek);
         }
         else {
-            await fetchTimeSlotsForDayOfWeek(selectedDayOfWeek);
+            await fetchTimeSlotsForDate(selectedDate);
         }
     }
 
