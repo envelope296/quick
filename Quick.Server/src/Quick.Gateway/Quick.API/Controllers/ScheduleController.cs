@@ -257,7 +257,7 @@ namespace Quick.API.Controllers
 
             if (request.WeekType.HasValue)
             {
-                lessonsQuery = lessonsQuery.Where(l => l.WeekType == request.WeekType.Value);
+                lessonsQuery = lessonsQuery.Where(l => l.WeekType == request.WeekType.Value || l.WeekType == null);
             }
             if (request.SubgroupId.HasValue)
             {
