@@ -14,6 +14,7 @@ import { useAppRouting } from "@/hooks/use-app-routing";
 import { LessonsView } from "../ui/schedules/LessonsView";
 import { LessonsEdit } from "../ui/schedules/LessonsEdit";
 import { Popup } from "../common/Popup";
+import { LessonAddForm } from "../ui/schedules/LessonAddForm";
 
 interface ScheduleViewEditPageContext {
     group: GroupResponse;
@@ -123,7 +124,10 @@ export function ScheduleViewEditPage() {
 
     return <section className={styles.screen}>
         <Popup isOpen={isAddLessonModalOpen}>
-            <div>Тест</div>
+            <LessonAddForm 
+                onCancel={closeAddLessonModal}
+                onCreate={async () => {}}
+            />
         </Popup>
 
         {group.isUserOwner &&

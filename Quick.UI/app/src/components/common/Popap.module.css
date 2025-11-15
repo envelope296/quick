@@ -13,9 +13,11 @@
 
 .popupContent {
   background: white;
-  padding: 20px;
-  border-radius: 8px;
-  min-width: 300px;
-  max-width: 90%;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 361px;
   position: relative;
+  padding: 45px 20px;
+  display: flex;
+  flex-direction: column;
 }
