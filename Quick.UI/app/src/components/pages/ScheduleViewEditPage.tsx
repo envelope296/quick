@@ -40,7 +40,8 @@ export function ScheduleViewEditPage() {
 
     const [selectedSubgroup, {set: setSelectedSubgroup, clear: clearSelectedSubgroup}] = useNullableState<EntityOption>();
     const [selectedWeekType, {set: setSelectedWeekType, clear: clearSelectedWeekType}] = useNullableState<WeekTypeOption>();
-    
+    const [selectedTimeSlotId, {set: setSelectedTimeSlotId, clear: clearSelectedTimeSlotId}] = useNullableState<string>();
+
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedDayOfWeek, setSelectedDayOfWeek] = useState(DayOfWeek.Monday);
 
@@ -53,6 +54,11 @@ export function ScheduleViewEditPage() {
 
     const [timeSlots, {set: setTimeSlots, clear: clearTimeSlots}] = useNullableState<TimeSlotResponse[]>()
     
+    function onLessonAddClick(timeSlotId: string) {
+        setSelectedTimeSlotId(timeSlotId);
+        openAddLessonModal();
+    }
+
     async function fetchTimeSlots() {
         if (isEdit) {
             await fetchTimeSlotsForDayOfWeek(selectedDayOfWeek);
@@ -180,7 +186,7 @@ export function ScheduleViewEditPage() {
                 dayOfWeek={selectedDayOfWeek} 
                 timeSlots={timeSlots} 
                 onDayOfWeekChanged={onDayOfWeekChanged} 
-                onAddClick={openAddLessonModal}
+                onAddClick={onLessonAddClick}
             />
             : <LessonsView date={selectedDate} timeSlots={timeSlots} onDateChanged={onDateChanged}
         />}
