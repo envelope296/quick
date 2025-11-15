@@ -2,19 +2,34 @@ import AsyncSelect from 'react-select/async';
 import styles from './LessonAddForm.module.css';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import { useState } from 'react';
-import { useBoolean } from '@/hooks';
+import { useBoolean, useNullableState } from '@/hooks';
+import * as scheduleService from "@/services/schedule";
+import { createEntityOption, type EntityOption } from '@/types/common';
+import { isNullOrEmpty } from '@/services/helpers/common';
 
 interface LessonAddForm {
+    scheduleId: string;
+    groupId: string;
     onCancel(): void;
     onCreate(): Promise<void>
 }
 
 export function LessonAddForm({
+    scheduleId,
+    groupId,
     onCancel,
     onCreate
 }: LessonAddForm) {
     const [disabled, {setTrue: disable, setFalse: enable}] = useBoolean(true);
 
+    const [lessonType, {set: setLessonTypeId, clear: clearLessonTypeId}] = useNullableState<string>();
+    const [cabinet, {set: setCabinet, clear: clearCabinet}] = useNullableState<string>();
+
+    async function getLessonTypeOptions(): Promise<EntityOption[]> {
+        const page = await scheduleService.getLessonTypesPage(scheduleId);
+        return page.items.map(lt => createEntityOption(lt.name, lt.id));
+    }
+    
     return <>
         <header className={styles.modalHeader}>
             <h1 className={styles.modalTitle}>Добавление занятия</h1>
@@ -46,11 +61,20 @@ export function LessonAddForm({
             />
 
             <AsyncSelect
+              isSearchable={false}
               placeholder="Тип занятия"
-              onChange={() => {}}
+              onChange={(option) => {
+                if (!option) {
+                    clearLessonTypeId();
+                }
+                else {
+                    setLessonTypeId(option.id)
+                }
+              }}
               classNames={{
                 control: () => "input-select"
               }}
+              loadOptions={getLessonTypeOptions}
               noOptionsMessage={() => "Тип занятия не найден"}
               loadingMessage={() => "Поиск..."}
             />
@@ -59,7 +83,15 @@ export function LessonAddForm({
               type="text"
               className="input-field"
               placeholder="Кабинет"
-              onChange={() =>{}}
+              onChange={(e) =>{
+                const v = e.target.value;
+                if (isNullOrEmpty(v)) {
+                    clearCabinet();
+                }
+                else {
+                    setCabinet(v);
+                }
+              }}
             />
           </div>
 
