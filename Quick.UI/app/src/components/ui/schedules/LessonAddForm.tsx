@@ -147,7 +147,7 @@ export function LessonAddForm({
 
             <AsyncSelect
               isClearable
-              isSearchable={false}
+              isSearchable
               placeholder="Тип занятия"
               onChange={(option) => {
                 if (!option) {
