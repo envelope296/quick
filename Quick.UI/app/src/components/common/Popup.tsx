@@ -10,8 +10,8 @@ export function Popup({isOpen, children}: PopupProps) {
     if (!isOpen) return null;
 
     return (
-        <div className={styles.popapOverlay}>
-            <div className={styles.popapContent}>
+        <div className={styles.popupOverlay}>
+            <div className={styles.popupContent}>
                 {children}
             </div>
         </div>
