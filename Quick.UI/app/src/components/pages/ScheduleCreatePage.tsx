@@ -81,7 +81,7 @@ export function ScheduleCreatePage() {
                                 defaultState={false}
                                 trueMessage="Есть"
                                 falseMessage="Нет"
-                                onChange={(value) => {
+                                onChange={async (value) => {
                                     const webApp = webAppContext.getWebApp();
                                     webApp.HapticFeedback.selectionChanged(false);
                                     setIsBiweekly(value);

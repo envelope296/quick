@@ -5,15 +5,15 @@ interface SwitcherOptions {
     defaultState: boolean,
     trueMessage: string,
     falseMessage: string,
-    onChange(callback: boolean): void;
+    onChange(callback: boolean): Promise<void>;
 }
 
 export function Switcher({defaultState, trueMessage, falseMessage, onChange}: SwitcherOptions) {
     const [state, setState] = useState(defaultState);
 
-    function changeState(newState: boolean) {
+    async function changeState(newState: boolean) {
         setState(newState);
-        onChange(newState);
+        await onChange(newState);
     }
 
     return (
