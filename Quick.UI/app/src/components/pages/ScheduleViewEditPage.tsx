@@ -127,6 +127,8 @@ export function ScheduleViewEditPage() {
             <LessonAddForm 
                 onCancel={closeAddLessonModal}
                 onCreate={async () => {}}
+                scheduleId={scheduleId}
+                groupId={group.id}
             />
         </Popup>
     <section className={styles.screen}>
