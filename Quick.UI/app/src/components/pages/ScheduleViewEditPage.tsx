@@ -115,6 +115,8 @@ export function ScheduleViewEditPage() {
         lessonTypeId: string | null,
         cabinet: string | null
     ) {
+        closeAddLessonModal();
+
         if (subjectId === null && !isNullOrEmpty(newSubjectName)) {
             subjectId = await subjectService.create(group.id, newSubjectName);
         }
@@ -133,7 +135,7 @@ export function ScheduleViewEditPage() {
             address: null
         }
         await scheduleServise.addLesson(request);
-        await fetchTimeSlots();
+        await fetchTimeSlots();        
     }
 
     useEffect(() => {
