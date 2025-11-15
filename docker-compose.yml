@@ -35,6 +35,14 @@ services:
         logging:
             options:
                 max-size: "200k"
+    quick-ui:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: quick-ui
+        ports:
+            - "3000:80"
+        restart: unless-stopped
 volumes:
     pg-data:
 

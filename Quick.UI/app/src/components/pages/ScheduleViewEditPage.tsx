@@ -173,6 +173,7 @@ export function ScheduleViewEditPage() {
                 onCancel={closetsadd}
                 onCreate={async (from, to) => {
                     await scheduleServise.addTs(from, to, scheduleId);
+                    await fetchTimeSlots();
                     closetsadd();
                 }}
             />
