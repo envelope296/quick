@@ -47,7 +47,7 @@ export function TSAddForm({ onCreate, onCancel }: TSAddFormoPS) {
                     </button>
 
                     <button
-                        disabled={!from || !to}
+                        disabled={!from || !to || !from.isBefore(to)}
                         className={`${styles.btn} ${styles.btnCreate}`}
                         onClick={() => onCreate(from!.format("HH:mm:ss"), to!.format("HH:mm:ss"))}
                     >
