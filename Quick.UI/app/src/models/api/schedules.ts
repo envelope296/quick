@@ -46,6 +46,7 @@ export interface LessonResponse {
 export interface LessonTypeResponse {
     id: string;
     name: string;
+    shortName: string | null;
 }
 
 export interface SubjectResponse {

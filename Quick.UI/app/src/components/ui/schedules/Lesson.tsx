@@ -14,7 +14,7 @@ export function Lesson({lesson}: LessonProps) {
         </div>
         {lesson.lessonType &&
             <div className={styles.lessonType}>
-                <p>{lesson.lessonType.name}</p>
+                <p>{lesson.lessonType.shortName}</p>
             </div>
         }
     </div>
