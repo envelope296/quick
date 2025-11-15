@@ -22,34 +22,63 @@ interface LessonAddForm {
     ): Promise<void>
 }
 
+interface NewEntityOption {
+  value: string;
+  label: string;
+  id: string | null;
+  isNew: boolean
+}
+
 export function LessonAddForm({
     scheduleId,
     groupId,
     onCancel,
     onCreate
 }: LessonAddForm) {
-    const [subjectId, {set: setSubjectId, clear: clearSubjectId}] = useNullableState<string>();
-    const [newSubjectName, {set: setNewSubjectName, clear: clearNewSubjectName}] = useNullableState<string>();
-    
-    const [teacherId, {set: setTeacherId, clear: clearTeacherId}] = useNullableState<string>();
-    const [newTeacherName, {set: setNewTeacherName, clear: clearNewTeacherName}] = useNullableState<string>();
+    const [subject, {set: setSubject, clear: clearSubject}] = useNullableState<NewEntityOption>();
+    const [teacher, {set: setTeacher, clear: clearTeacher}] = useNullableState<NewEntityOption>();
     
     const [lessonTypeId, {set: setLessonTypeId, clear: clearLessonTypeId}] = useNullableState<string>();
     const [cabinet, {set: setCabinet, clear: clearCabinet}] = useNullableState<string>();
 
-    async function getSubjectOptions(query: string) {
+    async function getSubjectOptions(query: string): Promise<NewEntityOption[]> {
       const page = await subjectService.getPage(groupId, query);
-      return page.items.map(s => createEntityOption(s.name, s.id));
+      return page.items.map(s => ({
+        id: s.id,
+        value: s.name,
+        label: s.name,
+        isNew: false
+      }));
     }
 
-    async function getTeacherOptions(query: string) {
+    async function getTeacherOptions(query: string): Promise<NewEntityOption[]> {
       const page = await teacherService.getPage(groupId, query);
-      return page.items.map(s => createEntityOption(s.fullName, s.id));
+      return page.items.map(s => ({
+        id: s.id,
+        value: s.fullName,
+        label: s.fullName,
+        isNew: false
+      }));
     }
 
     async function getLessonTypeOptions(): Promise<EntityOption[]> {
         const page = await scheduleService.getLessonTypesPage(scheduleId);
         return page.items.map(lt => createEntityOption(lt.name, lt.id));
+    }
+
+    async function create() {
+      if (subject === null) {
+        return;
+      }
+
+      onCreate(
+        subject.isNew ? null : subject.id!,
+        subject.isNew ? subject.value : null,
+        teacher === null ? null : (teacher.isNew ? null : teacher.id!),
+        teacher === null ? null : (teacher.isNew ? teacher.value : null),
+        lessonTypeId,
+        cabinet
+      );
     }
     
     return <>
@@ -63,10 +92,10 @@ export function LessonAddForm({
               placeholder="Предмет"
               onChange={(option) => {
                 if (!option) {
-                    clearSubjectId();
+                    clearSubject();
                 }
                 else {
-                    setSubjectId(option.id)
+                    setSubject(option)
                 }
               }}
               classNames={{
@@ -76,9 +105,15 @@ export function LessonAddForm({
               noOptionsMessage={() => "Введите название предмета"}
               formatCreateLabel={(value) => value}
               onCreateOption={(opt) => {
-                setNewSubjectName(opt);
+                setSubject({
+                  label: opt,
+                  value: opt,
+                  isNew: true,
+                  id: null
+                });
               }}
               loadingMessage={() => "Поиск..."}
+              value={subject}
             />
 
             <AsyncCreatableSelect
@@ -86,10 +121,10 @@ export function LessonAddForm({
               placeholder="Преподаватель"
               onChange={(option) => {
                 if (!option) {
-                    clearTeacherId();
+                    clearTeacher();
                 }
                 else {
-                    setTeacherId(option.id)
+                    setTeacher(option.id)
                 }
               }}
               classNames={{
@@ -99,7 +134,12 @@ export function LessonAddForm({
               noOptionsMessage={() => "Введите имя преподавателя"}
               formatCreateLabel={(value) => value}
               onCreateOption={(opt) => {
-                setNewTeacherName(opt);
+                setTeacher({
+                  label: opt,
+                  value: opt,
+                  isNew: true,
+                  id: null
+                });
               }}
               loadingMessage={() => "Поиск..."}
             />
@@ -148,7 +188,7 @@ export function LessonAddForm({
               Отмена
             </button>
             <button
-              disabled={subjectId === null && isNullOrEmpty(newSubjectName) }
+              disabled={subject === null }
               className={`${styles.btn} ${styles.btnCreate}`}
               onClick={() => onCreate(
                 subjectId,
