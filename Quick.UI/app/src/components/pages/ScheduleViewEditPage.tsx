@@ -5,13 +5,14 @@ import * as scheduleServise from "@/services/schedule"
 import * as subgroupService from "@/services/subgroup";
 import { Loading } from "../common/Loading";
 import { useNullableState } from "@/hooks";
-import { ScheduleType, WeekType, type ScheduleResponse, type TimeSlotResponse } from "@/models/api/schedules";
+import { DayOfWeek, ScheduleType, WeekType, type ScheduleResponse, type TimeSlotResponse } from "@/models/api/schedules";
 import { useEffect, useState } from "react";
 import { Switcher } from "../common/Switcher";
 import { createEntityOption, type EntityOption } from "@/types/common";
 import Select from "react-select";
 import { useAppRouting } from "@/hooks/use-app-routing";
 import { LessonsView } from "../ui/schedules/LessonsView";
+import { LessonsEdit } from "../ui/schedules/LessonsEdit";
 
 interface ScheduleViewEditPageContext {
     group: GroupResponse;
@@ -37,6 +38,9 @@ export function ScheduleViewEditPage() {
     const [selectedSubgroup, {set: setSelectedSubgroup, clear: clearSelectedSubgroup}] = useNullableState<EntityOption>();
     const [selectedWeekType, {set: setSelectedWeekType, clear: clearSelectedWeekType}] = useNullableState<WeekTypeOption>();
     
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedDayOfWeek, setSelectedDayOfWeek] = useState(DayOfWeek.Monday);
+
     const params = useParams();
     const scheduleId = params.scheduleId!;
 
@@ -45,6 +49,20 @@ export function ScheduleViewEditPage() {
     const [isEdit, setIsEdit] = useState(defaultIsEdit);
 
     const [timeSlots, {set: setTimeSlots, clear: clearTimeSlots}] = useNullableState<TimeSlotResponse[]>()
+    
+    async function fetchTimeSlots() {
+        if (isEdit) {
+            await fetchTimeSlotsForDate(selectedDate);
+        }
+        else {
+            await fetchTimeSlotsForDayOfWeek(selectedDayOfWeek);
+        }
+    }
+
+    async function onDateChanged(date: Date): Promise<void> {
+        setSelectedDate(date);
+        await fetchTimeSlotsForDate(date);
+    }
 
     async function fetchTimeSlotsForDate(date: Date): Promise<void> {
         const request = {
@@ -58,8 +76,22 @@ export function ScheduleViewEditPage() {
         setTimeSlots(timeSlotsPage.items);
     }
 
-    async function fetchTimeSlotsForDayOfWeek(): Promise<void> {
-        
+    async function onDayOfWeekChanged(dayOfWeek: DayOfWeek): Promise<void> {
+        setSelectedDayOfWeek(dayOfWeek);
+        await fetchTimeSlotsForDayOfWeek(dayOfWeek);
+    }
+
+    async function fetchTimeSlotsForDayOfWeek(dayOfWeek: DayOfWeek): Promise<void> {
+        const request = {
+            page: 1,
+            size: 100,
+            dayOfWeek: dayOfWeek,
+            weekType: selectedWeekType === null ? null : selectedWeekType.value,
+            scheduleId: scheduleId,
+            subgroupId: selectedSubgroup === null ? null : selectedSubgroup.id
+        }
+        var timeSlotsPage = await scheduleServise.getTimeSlotsPageForDayOfWeek(request);
+        setTimeSlots(timeSlotsPage.items);
     }
 
     useEffect(() => {
@@ -69,12 +101,14 @@ export function ScheduleViewEditPage() {
 
             const subgroupsPage = await  subgroupService.getPage(group.id, 1, 100);
             setSubgroupsOptions(subgroupsPage.items.map(s => createEntityOption(s.name, s.id)));
+
+            await fetchTimeSlots();
         }
 
         initialize();
     }, []);
 
-    if (schedule === null || subgroupsOptions === null) {
+    if (schedule === null || subgroupsOptions === null || timeSlots === null) {
         return <Loading />
     }
 
@@ -84,7 +118,10 @@ export function ScheduleViewEditPage() {
                 defaultState={!defaultIsEdit}
                 trueMessage="Просмотр"
                 falseMessage="Редактирование"
-                onChange={(v) => setIsEdit(!v)}
+                onChange={async (v) => {
+                    setIsEdit(!v);
+                    await fetchTimeSlots();
+                }}
             />
         }
         <div className={styles.container}>
@@ -130,8 +167,13 @@ export function ScheduleViewEditPage() {
             </div>
         </div>
         {isEdit 
-            ? <p>edit</p> 
-            : <LessonsView date={new Date()} timeSlots={timeSlots || []} onDateChanged={fetchTimeSlotsForDate}
+            ? <LessonsEdit 
+                dayOfWeek={selectedDayOfWeek} 
+                timeSlots={timeSlots} 
+                onDayOfWeekChanged={onDayOfWeekChanged} 
+                onAddClick={() => {}}
+            />
+            : <LessonsView date={selectedDate} timeSlots={timeSlots} onDateChanged={onDateChanged}
         />}
     </section>
 }

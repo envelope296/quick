@@ -3,7 +3,6 @@ import ArrorLeftIcon from "@/assets/arrow-left.svg?react";
 import ArrorRightIcon from "@/assets/arrow-right.svg?react";
 import type { TimeSlotResponse } from "@/models/api/schedules";
 import { Lesson } from "./Lesson";
-import { useState } from "react";
 
 interface LessonsViewProps {
   date: Date;
@@ -20,17 +19,14 @@ function getTimeRange(timeSlot: TimeSlotResponse) {
 }
 
 export function LessonsView({date, timeSlots, onDateChanged}: LessonsViewProps) {
-  const [currentDate, setCurrentDate] = useState(date);
-
   async function changeDate(diff: number) {
-    const newDate = new Date(currentDate);
-    newDate.setDate(currentDate.getDate() + diff);
-    setCurrentDate(newDate);
+    const newDate = new Date(date);
+    newDate.setDate(date.getDate() + diff);
     await onDateChanged(newDate);
   }
 
   function getDayOfWeek() {
-    const dayName = new Intl.DateTimeFormat("ru-RU", { weekday: "long" }).format(currentDate);
+    const dayName = new Intl.DateTimeFormat("ru-RU", { weekday: "long" }).format(date);
     const dayNameCapitalized = dayName.charAt(0).toUpperCase() + dayName.slice(1);
     return dayNameCapitalized;
   }
@@ -43,7 +39,7 @@ export function LessonsView({date, timeSlots, onDateChanged}: LessonsViewProps) 
         ><ArrorLeftIcon /></button>
         <div className={styles.headerLabel}>
           <h1>{getDayOfWeek()}</h1>
-          <p>{Intl.DateTimeFormat("ru-RU").format(currentDate)}</p>
+          <p>{Intl.DateTimeFormat("ru-RU").format(date)}</p>
         </div>
         <button
           onClick={() => changeDate(1)}

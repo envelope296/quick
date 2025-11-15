@@ -1,0 +1,83 @@
+.container {
+  background-color: #ffffff;
+  border-radius: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 10px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.header > button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.headerLabel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 60px;
+  width: 180px;
+}
+
+.headerLabel > h1 {
+  font-weight: 500;
+  font-size: 22px;
+  color: #000000;
+}
+
+.headerLabel > p {
+  font-size: 16px;
+  line-height: 1.22;
+  color: #757575;
+}
+
+.lessonsContainer {
+  background-color: #ebebeb;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2px;
+  border-top: 2px solid #ebebeb;
+}
+
+.lessonsContainer > div {
+  background-color: white;
+}
+
+.time {
+  padding: 10px;
+}
+
+.time > h1 {
+  background-color: #007aff;
+  color: white;
+  border-radius: 6px;
+  font-size: 16pt;
+  font-weight: 500;
+  height: 29px;
+}
+
+.time > p {
+  margin-top: 5px;
+  font-size: 10pt;
+  color: black;
+}
+
+.lessonAdd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
