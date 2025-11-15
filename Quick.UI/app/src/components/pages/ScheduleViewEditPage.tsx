@@ -238,6 +238,7 @@ export function ScheduleViewEditPage() {
                 timeSlots={timeSlots} 
                 onDayOfWeekChanged={onDayOfWeekChanged} 
                 onAddClick={onLessonAddClick}
+                onAddTsClick={opentsAdd}
             />
             : <LessonsView date={selectedDate} timeSlots={timeSlots} onDateChanged={onDateChanged}
         />}

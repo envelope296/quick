@@ -16,11 +16,11 @@ export function TSAddForm({onCreate, onCancel}: TSAddFormoPS) {
         <main className={styles.modalBody}>
           <div className={styles.formGroup}>
             <TimeField
-                label="Format without meridiem"
+                label="Начало"
                 format="HH:mm"
             />
             <TimeField
-                label="Format without meridiem"
+                label="Конец"
                 format="HH:mm"
             />
           </div>

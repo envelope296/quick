@@ -9,6 +9,7 @@ interface LessonsEditProps {
   dayOfWeek: DayOfWeek;
   timeSlots: TimeSlotResponse[];
   onAddClick(timeSlotId: string): void;
+  onAddTsClick(): void;
   onDayOfWeekChanged(dayOfWeek: DayOfWeek): Promise<void>;
 }
 
@@ -20,7 +21,7 @@ function getTimeRange(timeSlot: TimeSlotResponse) {
   return `${timeSlot.from.slice(0, 5)} - ${timeSlot.to.slice(0, 5)}`;
 }
 
-export function LessonsEdit({dayOfWeek, timeSlots, onDayOfWeekChanged, onAddClick}: LessonsEditProps) {
+export function LessonsEdit({dayOfWeek, timeSlots, onDayOfWeekChanged, onAddClick, onAddTsClick}: LessonsEditProps) {
   async function changeDayOfWeek(diff: number) {
     const result = ((dayOfWeek + diff) % 7 + 7) % 7;
     onDayOfWeekChanged(result as DayOfWeek);
@@ -75,7 +76,7 @@ export function LessonsEdit({dayOfWeek, timeSlots, onDayOfWeekChanged, onAddClic
         </>
         )}
       </div>
-      <button className={styles.tsButton}>
+      <button onClick={onAddTsClick} className={styles.tsButton}>
         Добавить пару
       </button>
     </div>

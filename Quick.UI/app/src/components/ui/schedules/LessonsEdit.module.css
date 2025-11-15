@@ -69,6 +69,7 @@
   font-size: 14pt;
   font-weight: 500;
   height: 29px;
+  padding-top: 3px;
 }
 
 .time > p {
@@ -96,7 +97,7 @@
 
 .tsButton {
   margin-top: 20px;
-    display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   min-height: 50px;
@@ -108,7 +109,7 @@
   padding: 10px;
   border: none;
   cursor: pointer;
-    background-color: transparent;
+  background-color: transparent;
   color: #007aff;
   border: 1px solid #007aff;
   min-height: 49px;
