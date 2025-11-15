@@ -264,6 +264,9 @@ namespace Quick.API.Controllers
             }
 
             var lessonsByTimeSlotIds = await lessonsQuery
+                .Include(l => l.Subject)
+                .Include(l => l.Teacher)
+                .Include(l => l.LessonType)
                 .GroupBy(l => l.TimeSlotId)
                 .ToDictionaryAsync(
                     g => g.Key,
