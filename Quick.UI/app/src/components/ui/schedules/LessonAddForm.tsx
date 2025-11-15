@@ -124,7 +124,7 @@ export function LessonAddForm({
                     clearTeacher();
                 }
                 else {
-                    setTeacher(option.id)
+                    setTeacher(option)
                 }
               }}
               classNames={{
