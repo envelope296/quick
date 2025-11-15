@@ -74,7 +74,7 @@ export function ScheduleViewEditPage() {
         initialize();
     }, []);
 
-    if (schedule === null || subgroupsOptions === null || timeSlots == null) {
+    if (schedule === null || subgroupsOptions === null) {
         return <Loading />
     }
 
