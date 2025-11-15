@@ -57,7 +57,6 @@ export async function addLesson(request: AddLessonRequest): Promise<string> {
 
 export async function addTs(from: string, to: string, scheduleId: string) {
     var request = {
-        name: "пара",
         from,
         to,
         scheduleId
