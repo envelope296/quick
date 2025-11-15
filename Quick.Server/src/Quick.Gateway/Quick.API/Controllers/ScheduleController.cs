@@ -197,6 +197,7 @@ namespace Quick.API.Controllers
                 WeekType = request.WeekType,
                 TeacherId = request.TeacherId,
                 CabinetNumber = request.CabinetNumber,
+                LessonTypeId = request.LessonTypeId,
                 Address = request.Address,
             };
             await _lessonRepository.ExecuteAddAsync(lesson, cancellationToken);

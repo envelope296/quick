@@ -1,5 +1,5 @@
 import type { PageResponse } from "@/models/api";
-import type { CreateScheduleRequest, GetTimeSlotsPageForDateRequest, GetTimeSlotsPageForDayOfWeekRequest, LessonTypeResponse, ScheduleResponse, TimeSlotResponse } from "@/models/api/schedules";
+import type { AddLessonRequest, CreateScheduleRequest, GetTimeSlotsPageForDateRequest, GetTimeSlotsPageForDayOfWeekRequest, LessonTypeResponse, ScheduleResponse, TimeSlotResponse } from "@/models/api/schedules";
 import { buildAxiosInstanse } from "../builders";
 import type { AxiosInstance } from "axios";
 
@@ -47,5 +47,10 @@ export async function getLessonTypesPage(scheduleId: string): Promise<PageRespon
             size: 100
         }
     });
+    return response.data;
+}
+
+export async function addLesson(request: AddLessonRequest): Promise<string> {
+    const response = await api().post<string>("/lessons", request);
     return response.data;
 }

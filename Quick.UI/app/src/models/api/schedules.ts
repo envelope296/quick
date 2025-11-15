@@ -78,7 +78,7 @@ export interface AddLessonRequest {
     subjectId: string;
     timeSlotId: string;
     teacherId: string | null;
-    lessonType: string | null;
+    lessonTypeId: string | null;
     cabinetNumber: string | null;
     address: string | null;
 }

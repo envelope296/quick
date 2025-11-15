@@ -3,6 +3,8 @@ import { useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import styles from "./ScheduleViewEditPage.module.css";
 import * as scheduleServise from "@/services/schedule"
 import * as subgroupService from "@/services/subgroup";
+import * as subjectService from "@/services/subjectService";
+import * as teacherService from "@/services/teacherService";
 import { Loading } from "../common/Loading";
 import { useBoolean, useNullableState } from "@/hooks";
 import { DayOfWeek, ScheduleType, WeekType, type ScheduleResponse, type TimeSlotResponse } from "@/models/api/schedules";
@@ -15,6 +17,7 @@ import { LessonsView } from "../ui/schedules/LessonsView";
 import { LessonsEdit } from "../ui/schedules/LessonsEdit";
 import { Popup } from "../common/Popup";
 import { LessonAddForm } from "../ui/schedules/LessonAddForm";
+import { isNullOrEmpty } from "@/services/helpers/common";
 
 interface ScheduleViewEditPageContext {
     group: GroupResponse;
@@ -104,6 +107,35 @@ export function ScheduleViewEditPage() {
         setTimeSlots(timeSlotsPage.items);
     }
 
+    async function createLesson(
+        subjectId: string | null,
+        newSubjectName: string | null,
+        teacherId: string | null,
+        newTeacherName: string | null,
+        lessonTypeId: string | null,
+        cabinet: string | null
+    ) {
+        if (subjectId === null && !isNullOrEmpty(newSubjectName)) {
+            subjectId = await subjectService.create(group.id, newSubjectName);
+        }
+        if (teacherId === null && !isNullOrEmpty(newTeacherName)) {
+            teacherId = await teacherService.create(group.id, newTeacherName);
+        }
+        const request = {
+            subjectId: subjectId!,
+            teacherId,
+            lessonTypeId,
+            dayOfWeek: selectedDayOfWeek,
+            weekType: selectedWeekType === null ? null : selectedWeekType.value,
+            subgroupId: selectedSubgroup == null ? null : selectedSubgroup.id,
+            timeSlotId: selectedTimeSlotId!,
+            cabinetNumber: cabinet,
+            address: null
+        }
+        await scheduleServise.addLesson(request);
+        await fetchTimeSlots();
+    }
+
     useEffect(() => {
         async function initialize() {
             const scheduleResult = await scheduleServise.get(scheduleId);
@@ -126,7 +158,7 @@ export function ScheduleViewEditPage() {
         <Popup isOpen={isAddLessonModalOpen}>
             <LessonAddForm 
                 onCancel={closeAddLessonModal}
-                onCreate={async () => {}}
+                onCreate={createLesson}
                 scheduleId={scheduleId}
                 groupId={group.id}
             />

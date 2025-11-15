@@ -1,9 +1,10 @@
 import AsyncSelect from 'react-select/async';
 import styles from './LessonAddForm.module.css';
 import AsyncCreatableSelect from 'react-select/async-creatable';
-import { useState } from 'react';
-import { useBoolean, useNullableState } from '@/hooks';
+import { useNullableState } from '@/hooks';
 import * as scheduleService from "@/services/schedule";
+import * as subjectService from "@/services/subjectService";
+import * as teacherService from "@/services/teacherService";
 import { createEntityOption, type EntityOption } from '@/types/common';
 import { isNullOrEmpty } from '@/services/helpers/common';
 
@@ -11,7 +12,14 @@ interface LessonAddForm {
     scheduleId: string;
     groupId: string;
     onCancel(): void;
-    onCreate(): Promise<void>
+    onCreate(
+      subjectId: string | null,
+      newSubjectName: string | null,
+      teacherId: string | null,
+      newTeacherName: string | null,
+      lessonTypeId: string | null,
+      cabinet: string | null
+    ): Promise<void>
 }
 
 export function LessonAddForm({
@@ -20,10 +28,24 @@ export function LessonAddForm({
     onCancel,
     onCreate
 }: LessonAddForm) {
-    const [disabled, {setTrue: disable, setFalse: enable}] = useBoolean(true);
-
-    const [lessonType, {set: setLessonTypeId, clear: clearLessonTypeId}] = useNullableState<string>();
+    const [subjectId, {set: setSubjectId, clear: clearSubjectId}] = useNullableState<string>();
+    const [newSubjectName, {set: setNewSubjectName, clear: clearNewSubjectName}] = useNullableState<string>();
+    
+    const [teacherId, {set: setTeacherId, clear: clearTeacherId}] = useNullableState<string>();
+    const [newTeacherName, {set: setNewTeacherName, clear: clearNewTeacherName}] = useNullableState<string>();
+    
+    const [lessonTypeId, {set: setLessonTypeId, clear: clearLessonTypeId}] = useNullableState<string>();
     const [cabinet, {set: setCabinet, clear: clearCabinet}] = useNullableState<string>();
+
+    async function getSubjectOptions(query: string) {
+      const page = await subjectService.getPage(groupId, query);
+      return page.items.map(s => createEntityOption(s.name, s.id));
+    }
+
+    async function getTeacherOptions(query: string) {
+      const page = await teacherService.getPage(groupId, query);
+      return page.items.map(s => createEntityOption(s.fullName, s.id));
+    }
 
     async function getLessonTypeOptions(): Promise<EntityOption[]> {
         const page = await scheduleService.getLessonTypesPage(scheduleId);
@@ -38,25 +60,45 @@ export function LessonAddForm({
           <div className={styles.formGroup}>
             <AsyncCreatableSelect
               placeholder="Предмет"
-              onChange={() => {}}
+              onChange={(option) => {
+                if (!option) {
+                    clearSubjectId();
+                }
+                else {
+                    setSubjectId(option.id)
+                }
+              }}
               classNames={{
                 control: () => "input-select"
               }}
+              loadOptions={getSubjectOptions}
               noOptionsMessage={() => "Введите название предмета"}
               formatCreateLabel={(value) => value}
-              onCreateOption={() => {}}
+              onCreateOption={(opt) => {
+                setNewSubjectName(opt);
+              }}
               loadingMessage={() => "Поиск..."}
             />
 
             <AsyncCreatableSelect
               placeholder="Преподаватель"
-              onChange={() => {}}
+              onChange={(option) => {
+                if (!option) {
+                    clearTeacherId();
+                }
+                else {
+                    setTeacherId(option.id)
+                }
+              }}
               classNames={{
                 control: () => "input-select"
               }}
+              loadOptions={getTeacherOptions}
               noOptionsMessage={() => "Введите имя преподавателя"}
               formatCreateLabel={(value) => value}
-              onCreateOption={() => {}}
+              onCreateOption={(opt) => {
+                setNewTeacherName(opt);
+              }}
               loadingMessage={() => "Поиск..."}
             />
 
@@ -103,9 +145,16 @@ export function LessonAddForm({
               Отмена
             </button>
             <button
-              disabled={disabled}
+              disabled={subjectId !== null || !isNullOrEmpty(newSubjectName) }
               className={`${styles.btn} ${styles.btnCreate}`}
-              onClick={onCreate}
+              onClick={() => onCreate(
+                subjectId,
+                newSubjectName,
+                teacherId,
+                newTeacherName,
+                lessonTypeId,
+                cabinet
+              )}
             >
               Добавить
             </button>

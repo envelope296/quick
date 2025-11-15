@@ -17,7 +17,7 @@ namespace Quick.BusinessLogic.Contracts.Requests.Schedules.Lessons
 
         public Guid? TeacherId { get; set; }
 
-        public Guid? LessonType { get; set; }
+        public Guid? LessonTypeId { get; set; }
 
         public string? CabinetNumber { get; set; }
 

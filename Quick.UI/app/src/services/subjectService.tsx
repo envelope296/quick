@@ -8,7 +8,7 @@ function api(): AxiosInstance {
     return api;
 }
 
-async function getPage(groupId: string, searchText: string): Promise<PageResponse<SubjectResponse>> {
+export async function getPage(groupId: string, searchText: string): Promise<PageResponse<SubjectResponse>> {
     const request = {
         groupId,
         searchText,
@@ -16,5 +16,14 @@ async function getPage(groupId: string, searchText: string): Promise<PageRespons
         size: 100
     }
     const response = await api().post<PageResponse<SubjectResponse>>('/page', request);
+    return response.data;
+}
+
+export async function create(groupId: string, name: string): Promise<string> {
+    const request = {
+        groupId,
+        name
+    }
+    const response = await api().post<string>('/', request);
     return response.data;
 }
