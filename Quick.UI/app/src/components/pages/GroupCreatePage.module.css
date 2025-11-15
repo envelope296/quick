@@ -79,4 +79,5 @@
 
 .btnCreate:disabled {
   background-color: #c9cccf;
+  cursor: default;
 }

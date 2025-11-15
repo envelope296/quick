@@ -1,6 +1,8 @@
 import AsyncSelect from 'react-select/async';
 import styles from './LessonAddForm.module.css';
 import AsyncCreatableSelect from 'react-select/async-creatable';
+import { useState } from 'react';
+import { useBoolean } from '@/hooks';
 
 interface LessonAddForm {
     onCancel(): void;
@@ -11,6 +13,8 @@ export function LessonAddForm({
     onCancel,
     onCreate
 }: LessonAddForm) {
+    const [disabled, {setTrue: disable, setFalse: enable}] = useBoolean(true);
+
     return <>
         <header className={styles.modalHeader}>
             <h1 className={styles.modalTitle}>Добавление занятия</h1>
@@ -67,7 +71,7 @@ export function LessonAddForm({
               Отмена
             </button>
             <button
-              disabled={true}
+              disabled={disabled}
               className={`${styles.btn} ${styles.btnCreate}`}
               onClick={onCreate}
             >

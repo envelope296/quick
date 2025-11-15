@@ -122,13 +122,15 @@ export function ScheduleViewEditPage() {
         return <Loading />
     }
 
-    return <section className={styles.screen}>
+    return <>
         <Popup isOpen={isAddLessonModalOpen}>
             <LessonAddForm 
                 onCancel={closeAddLessonModal}
                 onCreate={async () => {}}
             />
         </Popup>
+    <section className={styles.screen}>
+
 
         {group.isUserOwner &&
             <Switcher 
@@ -195,4 +197,5 @@ export function ScheduleViewEditPage() {
             : <LessonsView date={selectedDate} timeSlots={timeSlots} onDateChanged={onDateChanged}
         />}
     </section>
+    </>
 }
