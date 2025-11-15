@@ -131,7 +131,7 @@ export function ScheduleViewEditPage() {
         </div>
         {isEdit 
             ? <p>edit</p> 
-            : <LessonsView date={new Date()} timeSlots={timeSlots} onDateChanged={fetchTimeSlotsForDate}
+            : <LessonsView date={new Date()} timeSlots={timeSlots || []} onDateChanged={fetchTimeSlotsForDate}
         />}
     </section>
 }
