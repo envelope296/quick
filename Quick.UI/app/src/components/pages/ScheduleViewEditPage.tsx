@@ -4,7 +4,7 @@ import styles from "./ScheduleViewEditPage.module.css";
 import * as scheduleServise from "@/services/schedule"
 import * as subgroupService from "@/services/subgroup";
 import { Loading } from "../common/Loading";
-import { useNullableState } from "@/hooks";
+import { useBoolean, useNullableState } from "@/hooks";
 import { DayOfWeek, ScheduleType, WeekType, type ScheduleResponse, type TimeSlotResponse } from "@/models/api/schedules";
 import { useEffect, useState } from "react";
 import { Switcher } from "../common/Switcher";
@@ -13,6 +13,7 @@ import Select from "react-select";
 import { useAppRouting } from "@/hooks/use-app-routing";
 import { LessonsView } from "../ui/schedules/LessonsView";
 import { LessonsEdit } from "../ui/schedules/LessonsEdit";
+import { Popup } from "../common/Popup";
 
 interface ScheduleViewEditPageContext {
     group: GroupResponse;
@@ -34,6 +35,8 @@ export function ScheduleViewEditPage() {
         {label: "Чётная", value: WeekType.Even}, 
         {label: "Нечётная", value: WeekType.Odd}
     ];
+
+    const [isAddLessonModalOpen, {setTrue: openAddLessonModal, setFalse: closeAddLessonModal}] = useBoolean();
 
     const [selectedSubgroup, {set: setSelectedSubgroup, clear: clearSelectedSubgroup}] = useNullableState<EntityOption>();
     const [selectedWeekType, {set: setSelectedWeekType, clear: clearSelectedWeekType}] = useNullableState<WeekTypeOption>();
@@ -113,6 +116,10 @@ export function ScheduleViewEditPage() {
     }
 
     return <section className={styles.screen}>
+        <Popup isOpen={isAddLessonModalOpen}>
+            <div>Тест</div>
+        </Popup>
+
         {group.isUserOwner &&
             <Switcher 
                 defaultState={!defaultIsEdit}
