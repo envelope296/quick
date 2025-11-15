@@ -8,7 +8,7 @@ import { useState } from "react";
 interface LessonsViewProps {
   date: Date;
   timeSlots: TimeSlotResponse[];
-  onDateChanged(date: Date): void;
+  onDateChanged(date: Date): Promise<void>;
 }
 
 function getTimeRange(timeSlot: TimeSlotResponse) {
@@ -22,11 +22,11 @@ function getTimeRange(timeSlot: TimeSlotResponse) {
 export function LessonsView({date, timeSlots, onDateChanged}: LessonsViewProps) {
   const [currentDate, setCurrentDate] = useState(date);
 
-  function changeDate(diff: number) {
+  async function changeDate(diff: number) {
     const newDate = new Date(currentDate);
     newDate.setDate(currentDate.getDate() + diff);
     setCurrentDate(newDate);
-    onDateChanged(newDate);
+    await onDateChanged(newDate);
   }
 
   function getDayOfWeek() {

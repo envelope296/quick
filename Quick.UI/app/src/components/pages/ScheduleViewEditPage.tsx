@@ -5,7 +5,7 @@ import * as scheduleServise from "@/services/schedule"
 import * as subgroupService from "@/services/subgroup";
 import { Loading } from "../common/Loading";
 import { useNullableState } from "@/hooks";
-import { ScheduleType, WeekType, type ScheduleResponse } from "@/models/api/schedules";
+import { ScheduleType, WeekType, type ScheduleResponse, type TimeSlotResponse } from "@/models/api/schedules";
 import { useEffect, useState } from "react";
 import { Switcher } from "../common/Switcher";
 import { createEntityOption, type EntityOption } from "@/types/common";
@@ -38,18 +38,32 @@ export function ScheduleViewEditPage() {
     const [selectedWeekType, {set: setSelectedWeekType, clear: clearSelectedWeekType}] = useNullableState<WeekTypeOption>();
     
     const params = useParams();
-    const scheduleId = params.scheduleId;
+    const scheduleId = params.scheduleId!;
 
     const [searchParams] = useSearchParams();
     const defaultIsEdit = searchParams.get("edit") === "true";
     const [isEdit, setIsEdit] = useState(defaultIsEdit);
 
+    const [timeSlots, {set: setTimeSlots, clear: clearTimeSlots}] = useNullableState<TimeSlotResponse[]>()
+
+    async function fetchTimeSlotsForDate(date: Date): Promise<void> {
+        const request = {
+            page: 1,
+            size: 100,
+            date: date.toISOString(),
+            scheduleId: scheduleId,
+            subgroupId: selectedSubgroup === null ? null : selectedSubgroup.id
+        }
+        var timeSlotsPage = await scheduleServise.getTimeSlotsPageForDate(request);
+        setTimeSlots(timeSlotsPage.items);
+    }
+
+    async function fetchTimeSlotsForDayOfWeek(): Promise<void> {
+        
+    }
+
     useEffect(() => {
         async function initialize() {
-            if (scheduleId === undefined) {
-                throw new Error("Не передан ID расписания");
-            }
-
             const scheduleResult = await scheduleServise.get(scheduleId);
             setSchedule(scheduleResult);
 
@@ -60,7 +74,7 @@ export function ScheduleViewEditPage() {
         initialize();
     }, []);
 
-    if (schedule === null || subgroupsOptions === null) {
+    if (schedule === null || subgroupsOptions === null || timeSlots == null) {
         return <Loading />
     }
 
@@ -115,6 +129,9 @@ export function ScheduleViewEditPage() {
                 }
             </div>
         </div>
-        {isEdit ? <p>edit</p> : <LessonsView date={new Date()} timeSlots={[]} onDateChanged={() => {}}/>}
+        {isEdit 
+            ? <p>edit</p> 
+            : <LessonsView date={new Date()} timeSlots={timeSlots} onDateChanged={fetchTimeSlotsForDate}
+        />}
     </section>
 }
