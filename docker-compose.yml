@@ -37,7 +37,7 @@ services:
                 max-size: "200k"
     quick-ui:
         build:
-            context: .
+            context: ./Quick.UI/app/
             dockerfile: Dockerfile
         container_name: quick-ui
         ports:
