@@ -76,8 +76,18 @@
   color: black;
 }
 
+.lessonAddWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+}
+
 .lessonAdd {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 62px;
 }

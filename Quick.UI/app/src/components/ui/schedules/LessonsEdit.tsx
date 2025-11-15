@@ -22,10 +22,8 @@ function getTimeRange(timeSlot: TimeSlotResponse) {
 
 export function LessonsEdit({dayOfWeek, timeSlots, onDayOfWeekChanged}: LessonsEditProps) {
   async function changeDayOfWeek(diff: number) {
-    // const newDate = new Date(currentDate);
-    // newDate.setDate(currentDate.getDate() + diff);
-    // setCurrentDate(newDate);
-    // await onDayOfWeekChanged(newDate);
+    const result = ((dayOfWeek + diff) % 7 + 7) % 7;
+    onDayOfWeekChanged(result as DayOfWeek);
   }
 
   function getDayOfWeek(): string {
@@ -70,7 +68,9 @@ export function LessonsEdit({dayOfWeek, timeSlots, onDayOfWeekChanged}: LessonsE
           </div>
           <div>
             {ts.lessons.map((l) => <Lesson lesson={l} />)}
-            <button className={styles.lessonAdd}><PlusIcon /></button>
+            <div className={styles.lessonAddWrapper}>
+              <button className={styles.lessonAdd}><PlusIcon /></button>
+            </div>
           </div>
         </>
         )}
