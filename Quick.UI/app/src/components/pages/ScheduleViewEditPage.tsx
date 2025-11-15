@@ -180,7 +180,7 @@ export function ScheduleViewEditPage() {
                 dayOfWeek={selectedDayOfWeek} 
                 timeSlots={timeSlots} 
                 onDayOfWeekChanged={onDayOfWeekChanged} 
-                onAddClick={() => {}}
+                onAddClick={openAddLessonModal}
             />
             : <LessonsView date={selectedDate} timeSlots={timeSlots} onDateChanged={onDateChanged}
         />}
