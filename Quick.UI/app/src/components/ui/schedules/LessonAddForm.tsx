@@ -18,36 +18,36 @@ export function LessonAddForm({
         <main className={styles.modalBody}>
           <div className={styles.formGroup}>
             <AsyncCreatableSelect
-              className="input-field"
               placeholder="Предмет"
               onChange={() => {}}
               classNames={{
                 control: () => "input-select"
               }}
+              noOptionsMessage={() => "Введите название предмета"}
               formatCreateLabel={(value) => value}
               onCreateOption={() => {}}
               loadingMessage={() => "Поиск..."}
             />
 
             <AsyncCreatableSelect
-              className="input-field"
               placeholder="Преподаватель"
               onChange={() => {}}
               classNames={{
                 control: () => "input-select"
               }}
+              noOptionsMessage={() => "Введите имя преподавателя"}
               formatCreateLabel={(value) => value}
               onCreateOption={() => {}}
               loadingMessage={() => "Поиск..."}
             />
 
             <AsyncSelect
-              className="input-field"
               placeholder="Тип занятия"
               onChange={() => {}}
               classNames={{
                 control: () => "input-select"
               }}
+              noOptionsMessage={() => "Тип занятия не найден"}
               loadingMessage={() => "Поиск..."}
             />
 

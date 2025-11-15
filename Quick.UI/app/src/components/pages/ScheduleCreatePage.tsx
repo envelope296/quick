@@ -47,7 +47,13 @@ export function ScheduleCreatePage() {
             groupId: group.id,
             name: scheduleName,
             type: isBiweekly ? ScheduleType.Biweekly : ScheduleType.Weekly,
-            lessonTypes: []
+            lessonTypes: [
+                {name: "Лекция", shortName: "ЛК", hexColor: null},
+                {name: "Семинар", shortName: "СМ", hexColor: null},
+                {name: "Практическое занятие", shortName: "ПЗ", hexColor: null},
+                {name: "Лабораторная работа", shortName: "ЛР", hexColor: null},
+                {name: "Консультации", shortName: "КН", hexColor: null},
+            ]
         }
         const scheduleId = await scheduleService.create(request);
 
