@@ -115,6 +115,6 @@ export function ScheduleViewEditPage() {
                 }
             </div>
         </div>
-        {isEdit ? <p>edit</p> : <LessonsView />}
+        {isEdit ? <p>edit</p> : <LessonsView date={new Date()} timeSlots={[]} onDateChanged={() => {}}/>}
     </section>
 }
