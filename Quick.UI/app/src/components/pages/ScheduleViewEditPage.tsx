@@ -60,6 +60,10 @@ export function ScheduleViewEditPage() {
 
     const [timeSlots, {set: setTimeSlots, clear: clearTimeSlots}] = useNullableState<TimeSlotResponse[]>()
     
+    useEffect(() => {
+        fetchTimeSlots();
+    }, [selectedSubgroup, selectedWeekType, selectedDayOfWeek, selectedDate, isEdit]);
+
     function onLessonAddClick(timeSlotId: string) {
         setSelectedTimeSlotId(timeSlotId);
         openAddLessonModal();
@@ -188,7 +192,6 @@ export function ScheduleViewEditPage() {
                 falseMessage="Редактирование"
                 onChange={async (v) => {
                     setIsEdit(!v);
-                    await fetchTimeSlots();
                 }}
             />
         }
@@ -212,7 +215,6 @@ export function ScheduleViewEditPage() {
                         else {
                             setSelectedSubgroup(newValue);
                         }
-                        await fetchTimeSlots();
                     }}
                 />
                 {isEdit && schedule.type == ScheduleType.Biweekly &&
@@ -230,7 +232,6 @@ export function ScheduleViewEditPage() {
                             else {
                                 setSelectedWeekType(newValue);
                             }
-                            await fetchTimeSlots();
                         }}
                     />
                 }
