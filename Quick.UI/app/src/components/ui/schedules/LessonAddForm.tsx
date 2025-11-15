@@ -190,14 +190,7 @@ export function LessonAddForm({
             <button
               disabled={subject === null }
               className={`${styles.btn} ${styles.btnCreate}`}
-              onClick={() => onCreate(
-                subjectId,
-                newSubjectName,
-                teacherId,
-                newTeacherName,
-                lessonTypeId,
-                cabinet
-              )}
+              onClick={create}
             >
               Добавить
             </button>
