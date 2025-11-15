@@ -18,6 +18,7 @@ import { LessonsEdit } from "../ui/schedules/LessonsEdit";
 import { Popup } from "../common/Popup";
 import { LessonAddForm } from "../ui/schedules/LessonAddForm";
 import { isNullOrEmpty } from "@/services/helpers/common";
+import { TSAddForm } from "../ui/schedules/TSAddForm";
 
 interface ScheduleViewEditPageContext {
     group: GroupResponse;
@@ -41,6 +42,7 @@ export function ScheduleViewEditPage() {
     ];
 
     const [isAddLessonModalOpen, {setTrue: openAddLessonModal, setFalse: closeAddLessonModal}] = useBoolean();
+    const [tsAdd, {setTrue: opentsAdd, setFalse: closetsadd}] = useBoolean();
 
     const [selectedSubgroup, {set: setSelectedSubgroup, clear: clearSelectedSubgroup}] = useNullableState<EntityOption>();
     const [selectedWeekType, {set: setSelectedWeekType, clear: clearSelectedWeekType}] = useNullableState<WeekTypeOption>();
@@ -163,6 +165,13 @@ export function ScheduleViewEditPage() {
                 onCreate={createLesson}
                 scheduleId={scheduleId}
                 groupId={group.id}
+            />
+        </Popup>
+
+        <Popup isOpen={tsAdd}>
+            <TSAddForm 
+                onCancel={closeAddLessonModal}
+                onCreate={async () => {}}
             />
         </Popup>
     <section className={styles.screen}>
