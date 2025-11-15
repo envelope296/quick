@@ -261,7 +261,7 @@ namespace Quick.API.Controllers
             }
             if (request.SubgroupId.HasValue)
             {
-                lessonsQuery = lessonsQuery.Where(l => l.SubgroupId == request.SubgroupId.Value);
+                lessonsQuery = lessonsQuery.Where(l => l.SubgroupId == request.SubgroupId.Value || l.SubgroupId == null);
             }
 
             var lessonsByTimeSlotIds = await lessonsQuery
