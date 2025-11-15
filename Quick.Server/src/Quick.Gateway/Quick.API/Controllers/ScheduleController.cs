@@ -117,7 +117,7 @@ namespace Quick.API.Controllers
         }
 
         [HttpPost("time-slots")]
-        public async Task<ActionResult<Guid>> AddTimeSlotAsync([FromForm] AddTimeSlotRequest request, CancellationToken cancellationToken)
+        public async Task<ActionResult<Guid>> AddTimeSlotAsync([FromBody] AddTimeSlotRequest request, CancellationToken cancellationToken)
         {
             // TODO: Validation
 
