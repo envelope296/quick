@@ -30,7 +30,7 @@ export function LessonsView({date, timeSlots, onDateChanged}: LessonsViewProps) 
   }
 
   function getDayOfWeek() {
-    const dayName = new Intl.DateTimeFormat("ru-RU", { weekday: "long" }).format(new Date());
+    const dayName = new Intl.DateTimeFormat("ru-RU", { weekday: "long" }).format(currentDate);
     const dayNameCapitalized = dayName.charAt(0).toUpperCase() + dayName.slice(1);
     return dayNameCapitalized;
   }
