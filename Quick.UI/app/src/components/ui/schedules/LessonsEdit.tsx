@@ -75,6 +75,9 @@ export function LessonsEdit({dayOfWeek, timeSlots, onDayOfWeekChanged, onAddClic
         </>
         )}
       </div>
+      <button className={styles.tsButton}>
+        Добавить пару
+      </button>
     </div>
   );
 }

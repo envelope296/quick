@@ -142,6 +142,7 @@ export function LessonAddForm({
                 });
               }}
               loadingMessage={() => "Поиск..."}
+              value={teacher}
             />
 
             <AsyncSelect
