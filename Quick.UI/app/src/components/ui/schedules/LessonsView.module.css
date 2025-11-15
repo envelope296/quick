@@ -65,9 +65,10 @@
   background-color: #007aff;
   color: white;
   border-radius: 6px;
-  font-size: 16pt;
+  font-size: 14pt;
   font-weight: 500;
   height: 29px;
+  padding: 4px;
 }
 
 .time > p {
