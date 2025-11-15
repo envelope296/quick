@@ -137,13 +137,14 @@ export function ScheduleViewEditPage() {
                         control: () => "input-select"
                     }}
                     placeholder="Подгруппа"
-                    onChange={(newValue, _) => {
+                    onChange={async (newValue, _) => {
                         if (newValue == null) {
                             clearSelectedSubgroup();
                         }
                         else {
                             setSelectedSubgroup(newValue);
                         }
+                        await fetchTimeSlots();
                     }}
                 />
                 {isEdit && schedule.type == ScheduleType.Biweekly &&
@@ -154,13 +155,14 @@ export function ScheduleViewEditPage() {
                             control: () => "input-select"
                         }}
                         placeholder="Неделя"
-                        onChange={(newValue, _) => {
+                        onChange={async (newValue, _) => {
                             if (newValue == null) {
                                 clearSelectedWeekType();
                             }
                             else {
                                 setSelectedWeekType(newValue);
                             }
+                            await fetchTimeSlots();
                         }}
                     />
                 }
