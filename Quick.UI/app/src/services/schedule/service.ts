@@ -54,3 +54,13 @@ export async function addLesson(request: AddLessonRequest): Promise<string> {
     const response = await api().post<string>("/lessons", request);
     return response.data;
 }
+
+export async function addTs(from: string, to: string, scheduleId: string) {
+    var request = {
+        name: "пара",
+        from,
+        to,
+        scheduleId
+    }
+    await api().post<string>("time-slots", request);
+}

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { LocalizationProvider, TimeField } from '@mui/x-date-pickers';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 import styles from './TSAddForm.module.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 interface TSAddFormoPS {
-    onCreate(from: Dayjs | null, to: Dayjs | null): Promise<void>
+    onCreate(from: string, to: string): Promise<void>
     onCancel(): void
 }
 
@@ -49,7 +49,7 @@ export function TSAddForm({ onCreate, onCancel }: TSAddFormoPS) {
                     <button
                         disabled={!from || !to}
                         className={`${styles.btn} ${styles.btnCreate}`}
-                        onClick={() => onCreate(from, to)}
+                        onClick={() => onCreate(from!.format("HH:mm:ss"), to!.format("HH:mm:ss"))}
                     >
                         Добавить
                     </button>

@@ -170,8 +170,11 @@ export function ScheduleViewEditPage() {
 
         <Popup isOpen={tsAdd}>
             <TSAddForm 
-                onCancel={closeAddLessonModal}
-                onCreate={async () => {}}
+                onCancel={closetsadd}
+                onCreate={async (from, to) => {
+                    await scheduleServise.addTs(from, to, scheduleId);
+                    closetsadd();
+                }}
             />
         </Popup>
     <section className={styles.screen}>

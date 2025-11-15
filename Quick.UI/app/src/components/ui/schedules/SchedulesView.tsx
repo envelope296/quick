@@ -26,13 +26,7 @@ export function SchedulesView({group, schedules}: SchedulesViewProps) {
                             className={`${styles.btn} ${styles.btnAction}`}
                             onClick={() => navigate(`/groups/${group.id}/create-schedule`)}
                         >
-                            Создать
-                        </button>
-                        <button
-                            className={`${styles.btn} ${styles.btnAction}`}
-                            // onClick={() => navigate('/join-group')}
-                        >
-                            Считать из файла
+                            Добавить
                         </button>
                     </div>
                 }

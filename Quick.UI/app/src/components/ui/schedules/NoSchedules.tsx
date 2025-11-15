@@ -18,8 +18,7 @@ export function NoSchedules({group}: NoSchedulesParams) {
                     <div className={styles["text-content"]}>
                         <h1 className={styles.title}>Расписания группы</h1>
                         <p className={styles.subtitle}>
-                            Пока у группы нет расписний. 
-                            Вы можете создать расписание вручную или отправить файл, из которого приложение считает расписание.
+                            Пока у группы нет расписний.
                         </p>
                     </div>
                     <div className={styles["button-group"]}>
@@ -28,12 +27,6 @@ export function NoSchedules({group}: NoSchedulesParams) {
                             className="btn btn-primary"
                         >
                             Создать вручную
-                        </button>
-                        <button 
-                            className="btn btn-secondary"
-                            // onClick={() => navigate('/join-group')}
-                        >
-                            Считать из файла
                         </button>
                     </div>
                 </div>
