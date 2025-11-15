@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { TimeField } from '@mui/x-date-pickers';
+import { LocalizationProvider, TimeField } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 import styles from './TSAddForm.module.css';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 interface TSAddFormoPS {
     onCreate(from: Dayjs | null, to: Dayjs | null): Promise<void>
@@ -20,6 +21,7 @@ export function TSAddForm({ onCreate, onCancel }: TSAddFormoPS) {
             </header>
 
             <main className={styles.modalBody}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <div className={styles.formGroup}>
                     <TimeField
                         label="Начало"
@@ -34,6 +36,7 @@ export function TSAddForm({ onCreate, onCancel }: TSAddFormoPS) {
                         onChange={(newValue) => setTo(newValue)}
                     />
                 </div>
+                </LocalizationProvider>
 
                 <div className={styles.modalActions}>
                     <button
